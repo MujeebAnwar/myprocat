@@ -1,0 +1,1346 @@
+/* background image manipulation */
+body {
+  background-color:white;
+  padding:0px;
+  margin:3px;
+}
+div.outer {
+	clear:none;
+}
+table.resultTable
+{
+	width:80%;
+	margin-left:10%;
+	font-family:Verdana,Tahoma,Sans-serif;
+}
+table.resultTable th
+{
+	text-align:left;
+	font-size:20px;
+	border-bottom:1px solid black;
+
+}
+table.resultTable td
+{
+	font-size:16px;
+}
+table.resultTable td:first-child
+{
+	width:60%;
+	border-right:1px solid black;
+}
+div.background_grayscale {
+        -moz-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+         -o-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+         -webkit-filter: grayscale(100%);
+         filter: grayscale(100%);
+         position: fixed;
+		right: 0;
+		bottom: 0;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: auto;
+		z-index: -100;
+		display: block;
+     }
+div.background {
+          position: fixed;
+		right: 0;
+		bottom: 0;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: auto;
+		z-index: -100;
+		display: block;
+}
+div.background_nongrayscale {
+          position: fixed;
+		right: 0;
+		bottom: 0;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: auto;
+		z-index: -100;
+		display: block;
+}
+
+/* Login bar */
+div.login_bar
+{
+	margin-left:0px;
+	background-color:black;
+	color: white;
+	padding:0;
+}
+div.loginbar_left
+{
+	
+	height:30px;
+	background-color:black;
+	color: white;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding:2px;
+	padding-bottom:0px;
+	width:250px;
+}
+div.loginbar_right
+{
+	height:30px;
+	background-color:black;
+	color: white;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding:2px;
+	padding-bottom:0px;
+}
+div.logoutbar_left
+{
+	
+	height:30px;
+	background-color:black;
+	color: white;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding:2px;
+	padding-bottom:0px;
+	width:700px;
+}
+div.logoutbar_right
+{	background-color:black;
+	color: white;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding:2px;
+	padding-bottom:0px;
+
+	height:30px;
+}
+div.login_form_field
+{
+	background-color:black;
+	color: white;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding:2px;
+	padding-bottom:0px;
+}
+form {
+	margin:0;
+	padding:0;
+}
+div.login_field_label
+{
+	margin:0px;
+	padding:0px;
+	width:70px;
+}
+p.login_field_label
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:10pt;
+	color:orange;
+	margin:0px;
+	padding:0px;
+	padding-top:2px;
+}
+div.login_field_input
+{	
+	margin:0px;
+	padding:0px;
+	width:120px;
+
+}
+input.login_field_input
+{
+	width:120px;
+}
+p.welcome
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12pt;
+	margin:0px;
+	margin-left: 13px;
+	margin-top: 3px;
+	padding:0px;
+	color:orange;
+}
+input.login
+{
+	margin-top:0px;
+	margin-bottom:0px;
+	padding: 3px 10px;
+	background:#ccc; 
+	border:1px solid black;
+    cursor:pointer;
+    border-radius: 5px;
+    font-family:Verdana,Tahoma,Sans-serif;
+    font-weight:bold;
+    font-size: 10pt;
+    color:black;
+    min-height: 28px;
+  	min-width: 64px;
+	
+}
+form.login_form
+{
+	margin:0;
+	padding:0;
+
+}
+/* Banner Object */
+div.main_banner
+{
+	margin:0 auto;
+	padding:0;
+	overflow:none;
+	clear:left;
+	background: linear-gradient(to right, #ddd, white, white, white, white, #ddd)
+}
+
+p.main_banner
+{
+	margin:0px;
+	margin-left:0px;
+	padding-top:0px;
+	text-align: center;
+	padding-bottom:0px;
+}
+/* structure */
+div.content_section
+{
+	margin: 0 auto;
+	padding: 0px;
+	padding-bottom: 1px;
+}
+
+/* Menu Object */
+div.menu_h_box {
+    background-color: black;
+    margin: 0px;
+    height: 30px;
+    padding: 0px;
+    width: 100%;
+}
+
+a.menu_h {
+	text-decoration:none !important;
+	color:orange;
+}
+ul.menu_h {
+  text-align: left;
+  display: inline;
+  margin: 0;
+  padding: 0px 0px 0px 0px;
+  list-style: none;
+ z-index:9995;
+ background: black
+}
+ul.menu_h li.menu_h {
+  font-family: Verdana,sans-serif;
+  font-size: 9.5pt;
+  display: inline-block;
+  margin-right: 0px;
+  position: relative;
+  padding: 5px 15px 5px 15px;
+  background: black;
+  cursor: pointer;
+  float: left;
+  height:20;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+   z-index:9996;
+   background: black;
+   border-left:1px solid #444;
+}
+ul.menu_h li.menu_h:hover {
+  background: #444;
+  z-index:9996;
+}
+ul.menu_h li.menu_h ul.menu_h {
+  padding: 0;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+
+   z-index:9997;
+}
+ul.menu_h li.menu_h ul.menu_h li.menu_h { 
+  background: black; 
+  display: block; 
+  color: orange;
+  width: 180px;
+  border-bottom:1px solid #444;
+  z-index:9998;
+}
+ul.menu_h li.menu_h ul.menu_h li.menu_h:hover { 
+  background: #444;
+   z-index:9998;
+}
+ul.menu_h li.menu_h:hover ul.menu_h {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+   z-index:9997;
+}
+div.menu_box
+{
+	background-color:HSL(288,17%,25%);
+	border: 2px solid HSL(288,17%,25%);
+	width:150;
+	margin-right:10px;
+	margin-top:10px;
+	min-height:600px;
+	padding:0;
+}
+p.menu_header
+{
+	background-color:HSL(288,17%,25%);
+	font: 12px/18px sans-serif;
+	display: block; 
+	color:white; 
+	width: 146px;
+	padding: 5px 0px 0px 0px;
+	margin:0;
+	text-align:center;
+	border-bottom:1px solid HSL(288,17%,30%);
+}
+a.menu {
+	text-decoration:none !important;
+	color:yellow;
+}
+ul.menu {
+  text-align: left;
+  display: inline;
+  margin: 0;
+  padding: 0px 0px 0px 0px;
+  list-style: none;
+ z-index:9995;
+ background: HSL(288,17%,75%);
+}
+ul.menu li.menu {
+  font: 12px/18px sans-serif;
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 5px 5px 5px 5px;
+  background: #fff;
+  cursor: pointer;
+  width:140;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+   z-index:9996;
+   background: HSL(288,17%,25%);
+   border-bottom:1px solid HSL(288,17%,30%);
+}
+ul.menu li.menu:hover {
+  background: HSL(288,17%,50%);
+  z-index:9996;
+}
+ul.menu li.menu ul.menu {
+  padding: 0;
+  position: absolute;
+  top: 0px;
+  left: 150;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+
+   z-index:9997;
+}
+ul.menu li.menu ul.menu li.menu { 
+  background:  HSL(288,17%,25%); 
+  display: block; 
+  color:yellow;
+  width: 150px;
+   z-index:9998;
+}
+ul.menu li.menu ul.menu li.menu:hover { 
+	background: HSL(288,17%,50%);
+   z-index:9998;}
+ul.menu li.menu:hover ul.menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+
+   z-index:9997;
+}
+/* Hover tooltip */
+div.hovertooltip
+{
+	background-image: url('/img/QuestionMark.png');
+	background-repeat: no-repeat;
+	background-position: left top;
+	position:absolute;
+    right: -22px;
+	width:20;
+	height:20;
+}
+    div.hovertooltip div.hovertooltippopup {
+        border: 1px solid HSL(288,17%,43%);
+        border-radius: 4px;
+        padding: 2px;
+        text-align: left;
+        width: max-content;
+        max-width:350px;
+        display: none;
+        background: HSLA(0,0%,95%,.9);
+        position: absolute;
+        right: -10px;
+        top: 22px;
+        z-index: 999;
+    }
+div.hovertooltip[halign="left"] div.hovertooltippopup {
+    left:-10px;
+    right:unset;
+}
+
+div.hovertooltip[valign="top"] div.hovertooltippopup {
+    top:unset;
+    bottom:22px;
+}
+div.hovertooltip:hover div.hovertooltippopup
+{
+	display:block;
+
+}
+p.hoverToolTipPopup
+{	
+	font-size:8pt;
+	margin:0px;
+	padding:0px;
+	font-family:Verdana,Tahoma,Sans-serif;
+}
+/* Roomlist and Room Icons */
+div.room_icon:hover
+{
+	filter:none; 
+	border: 2px solid yellow;
+	background-color:white;
+	border-radius: 20px;
+	text-shadow: 0 0 32px black,
+				0 0 16px black,
+				0 0 8px black,
+				0 0 4px black,
+				0 0 2px black;
+	color:white;
+	width:180px;
+	height:100px;
+	margin-right:10px;
+	margin-top:10px;
+}
+div.room_icon
+{
+	filter: grayscale(50%); 
+   	border: 2px solid black;
+	border-radius: 20px;
+	text-shadow: 0 0 32px black,
+				0 0 16px black,
+				0 0 8px black,
+				0 0 4px black,
+				0 0 2px black;
+	color:white;	
+	width:180px;
+	height:100px;
+	margin-right:10px;
+	margin-top:10px;
+}
+div.room_color_icon
+{
+	
+	filter: grayscale(50%);
+	border: 2px solid HSL(288,17%,43%);
+	border-radius: 20px;
+	text-shadow: 0 0 32px black,
+				0 0 16px black,
+				0 0 8px black,
+				0 0 4px black,
+				0 0 2px black;
+	color:white;
+	width:180px;
+	height:100px;
+	margin-right:10px;
+	margin-top:10px;
+}
+div.room_color_icon:hover
+{
+	 
+	filter:none; 
+   	background-color:HSL(0,0,30%);
+	border: 2px solid yellow;
+	border-radius: 20px;
+	text-shadow: 0 0 32px black,
+				0 0 16px black,
+				0 0 8px black,
+				0 0 4px black,
+				0 0 2px black;
+	color:white;
+	margin-right:10px;
+	margin-top:10px;
+}
+a.room_icon
+{
+	text-decoration:none;
+}
+p.room_icon
+{
+	text-align:center;
+	margin-top:20%;
+	margin-bottom: 0px;
+	padding:0;
+	font-family:verdana,tahoma,sans-serif;
+	font-size:16pt;
+}
+p.room_icon_subtitle
+{
+	text-align:center;
+	margin-top:2px;
+	padding:0;
+	font-family:verdana,tahoma,sans-serif;
+	font-size:12pt;
+}
+div.room_list
+{
+	padding:10px;
+	width:800px;
+}
+/* FileList Object */
+div.filelist_list {
+}
+div.filelist_roomtitle {
+	background-color:#FFFFE5;
+	border: 2px solid black;
+	border-radius: 10px;
+	margin-bottom:5px;
+	font-size:24px;
+	margin-top:12px;
+	padding:3px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	text-align:center;
+	width:800px;
+}
+p.filelist_roomtitle {
+	/*text-transform:uppercase;*/
+	font-weight:bold;
+	margin-bottom:7px;
+}
+div.filelist_roomdescription
+{
+	border-top:1px solid black;
+	width:70%;
+	margin-left:15%;
+	text-align:center;
+}
+p.filelist_roomdescription
+{
+	font-size:12px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	text-align:center;
+}
+
+/* Filelink Object */
+div.fileupload_description {
+	height:100px;
+	width:500px;
+	margin:0;
+	margin-top:2px;
+}
+p.fileupload_description {
+	font-family:Verdana,Tahoma,Sans-serif;
+	padding:3px;
+	margin:0;
+	margin-bottom:0px;
+	font-size:10pt;
+}
+a.filelink_anchor {
+	text-decoration:none !important;
+}
+img.filelink_icon {
+	margin-top:3px;
+	margin-bottom: -3px;
+}
+p.fileupload_filename {
+	font-size:20px;
+	margin:0;
+	margin-top:12px;
+	margin-bottom:0px;
+	padding:0px;
+	width:490px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	border-bottom:1px solid blue;
+}
+
+div.filelink_description {
+	height:100px;
+	width:605px;
+	margin:0;
+	margin-top:2px;
+}
+a.filelink_anchor {
+	text-decoration:none !important;
+}
+img.filelink_icon {
+	margin-top:3px;
+	margin-bottom: -3px;
+}
+p.filelink_filename {
+	font-size:20px;
+	margin:0;
+	margin-top:12px;
+	margin-bottom:0px;
+	padding:0px;
+	width:620px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	border-bottom:1px solid blue;
+}
+p.filelink_description {
+	font-family:Verdana,Tahoma,Sans-serif;
+	padding:3px;
+	margin:0;
+	margin-bottom:0px;
+	font-size:10pt;
+}
+div.filelink_date {
+	height:100px;
+}
+p.filelink_date {
+	font-style:italic;
+	font-size:small;
+	margin-top:5px;
+	margin-bottom:5px;
+	margin-left:10px;
+}
+div.filelink_downloadbutton
+{
+	padding:12px;
+}
+div.filelink_container {
+	border: 2px solid black;
+	background:#FFFFE5;
+	border-radius: 10px;
+	margin-bottom:5px;
+	padding-left: 5px;
+	padding-right:15px;
+	height: 128px;
+	width:786px;  
+}
+/* File publish form */
+div.filepublish_form_field
+{
+	border: 1px solid HSL(288,17%,43%);
+	border-radius: 5px;
+	color:black;
+	background-color:white;
+}
+div.filepublish_field_input
+{
+	color:black;
+	background-color:white;
+	margin:2px;
+	margin-left:10px;
+}
+p.filepublish_field_label
+{
+	margin:0;
+	padding:3px;
+	width:180px;
+	text-align:right;
+}
+input.filepublish_field_input
+{
+	color:black;
+	background-color:white;	
+	margin:0px;
+	margin-left:0px;
+	width:400px;
+	display:inline-block;
+}
+/* Footer Object */
+div.main_footer
+{
+	border-top: 1px solid black;
+	width:750px;
+	margin-top:5px;
+}
+div.footer_yellow
+{
+	border-top: 1px solid yellow;
+	background-color:rgba(255,255,255,.7);
+	color: black;
+	padding:10px;
+	width:750px;
+
+}
+p.copyright_notice
+{
+	font-style: italic;
+	font-size: 8pt;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	font-family: verdana,tahoma,sans-serif;
+}
+/* General Use */
+p.verbosemessage
+{
+	font-size:12pt;
+	margin:12px;
+	padding:3px;
+	font-family:Verdana,Tahoma,Sans-serif;
+}
+p.message
+{
+	font-size:14pt;
+	margin:12px;
+	padding:3px;
+	font-family:Verdana,Tahoma,Sans-serif;
+}
+p.smalltext
+{
+	font-size:10pt;
+	margin:0px;
+	padding:0px;
+	font-family:Verdana,Tahoma,Sans-serif;
+}
+p.errormessage
+{
+	font-size:16pt;
+	margin:12px;
+	padding:3px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	color:red;
+}
+p.importantmessage
+{
+	font-size:20pt;
+	margin:12px;
+	padding:3px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+}
+div.whitebox
+{
+	border: 2px solid black;
+	background:white;
+	border-radius: 10px;
+	margin:0;
+	margin-top:10px;
+	margin-left:5px;
+	padding:5px;
+	width:650px;
+
+}
+/* Reset Password Form */
+input.forgotpasswordlink
+{
+	background: none!important;
+	border: none;
+	padding: 0!important;
+	border-bottom: 1px solid blue;
+	cursor: pointer;
+	color: blue;
+	font-family: Verdana, Tahoma, Sans-serif;
+	font-size: 10pt;
+	margin-left: 32%;
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+div.reminderpopupbox
+{
+	border: 1px solid HSL(288,17%,43%);
+	border-radius: 4px;
+	padding:2px;
+	text-align:left;
+	width:189px;
+	display:none;
+    background: HSLA(0,0%,95%,.6);
+    z-index: 500;
+}
+span.reminderpopuplink
+{ 
+	font-family: Verdana, Tahoma, Sans-serif;
+	font-size: 10pt;
+	float: right;
+    margin-right: 190px;
+    border-bottom: 1px solid blue;
+    cursor: pointer;
+    color: blue
+}
+div.resetpassword_field_label
+{
+	width:250px;
+	height:30px;
+	margin:0;
+	padding:0;
+	padding-right:5px;
+	text-align:right;
+}
+label.resetpassword_field_label
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+	margin:0;
+	padding:2px;
+}
+p.resetpassword_field_label
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+	margin:0;
+	padding:2px;
+}
+div.resetpassword_field_input
+{
+	width:220px;
+	height:20px;
+	margin:0;
+	padding:0;
+}
+input.resetpassword_field_input
+{
+	width:220px;
+	height:20px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+}
+div.pwdrecovery_form_field
+{
+	margin: 0px;
+	margin-bottom: 2px;
+	padding: 0px;
+	height: 22px;
+}
+div.pwdrecovery_field_label
+{
+  margin: 0px;
+  padding: 0px;
+}
+label.pwdrecovery_field_label
+{
+	font-family: Verdana,Tahoma,Sans-serif;
+	margin: 0px;
+	margin-left: 25px;
+	padding: 0px;
+	width: 200px;
+	text-align: right;
+}
+p.pwdrecovery_field_label
+{
+	font-family: Verdana,Tahoma,Sans-serif;
+	margin: 0px;
+	margin-left: 25px;
+	padding: 0px;
+	width: 200px;
+	text-align: right;
+}
+div.pwdrecovery_field_input
+{
+	margin: 0px;
+	padding: 0px;
+}
+input.pwdrecovery_field_input
+{
+	margin: 0px;
+	padding: 0px;
+	height: 20px;
+	width: 200px;
+}
+input.pwdrecovery_submit
+{
+	margin-left: 220px;
+}
+
+/* Edit user form */
+div.permissions_row
+{
+	margin:0;
+	padding:0;
+	padding-top:2px;
+	padding-bottom:2px;
+	border-bottom:1px solid blue;
+}
+div.edit_user_field_label
+{
+	width:250px;
+	height:30px;
+	margin:0;
+	padding:0;
+	padding-right:5px;
+	text-align:right;
+}
+p.edit_user_field_label
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+	margin:0;
+	padding:2px;
+}
+div.edit_user_field_input
+{
+	width:220px;
+	height:20px;
+	margin:0;
+	padding:0;
+}
+input.edit_user_field_input
+{
+	width:220px;
+	height:20px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+}
+select.room_select
+{
+	position:relative;
+	float:left;
+	height: 21px;
+	width:126px;	
+}
+div.room_expiration_form_field
+{
+	position:relative;
+	float:left;
+}
+div.room_expiration_field_label
+{
+	height:20px;
+	margin:0;
+	padding:0;
+
+	text-align:right;
+}
+p.room_expiration_field_label
+{
+	height:20px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+	padding-left: 2px;
+	padding-top: 1px;
+	margin: 0;
+}
+div.room_expiration_field_input
+{
+border-right: 1px solid grey;
+  margin-right: 2px;
+}
+input.room_expiration_field_input
+{
+
+}
+input.edit_user /* submit button */
+{
+	width:220px;
+	height:20px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+	margin-left:255px;
+}
+/* Manage administrators form */
+div.addadmin_field_label
+{
+	width:100px;
+	height:30px;
+	margin:0;
+	padding:0;
+	padding-right:5px;
+	text-align:right;
+}
+p.addadmin_field_label
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+	margin:0;
+	padding:2px;
+}
+div.addadmin_field_input
+{
+	width:220px;
+	height:20px;
+	margin:0;
+	padding:0;
+}
+input.addadmin_field_input
+{
+	width:220px;
+	height:20px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+}
+/* Change Password form */
+div.changepassword_field_form_field
+{
+	margin:0;
+	padding:0;
+}
+div.changepassword_field_field_label
+{
+	width:220px;
+	height:30px;
+	margin:0;
+	padding:0;
+	padding-right:5px;
+	text-align:right;
+}
+p.changepassword_field_field_label
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+	margin:0;
+	padding:4px;
+}
+div.changepassword_field_field_input
+{
+	width:220px;
+	height:30px;
+	margin:0;
+	padding:0;
+}
+input.changepassword_field_field_input
+{
+	width:220px;
+	height:30px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:14;
+}
+input.changepassword_submit
+{
+	margin-top:3px;
+	margin-left:225px;
+}
+p.form_success
+{
+	font-size:20pt;
+	margin:12px;
+	padding:3px;
+	min-width:700px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+	color:blue;	
+}
+p.form_error
+{
+	font-size:16pt;
+	margin:12px;
+	padding:3px;
+	width:700px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	color:red;	
+}
+
+/* Edit File Form */
+p.edit_filename_field_label
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+	margin:0;
+	padding:4px;
+}
+input.edit_filename_field_input
+{
+	width:220px;
+	height:30px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:14;
+}
+p.edit_file_description_field_label
+{
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-weight:bold;
+	margin:0;
+	padding:4px;
+}
+textarea.edit_file_description_field_input
+{
+	width:500px;
+	height:200px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:14;
+}
+/* Upload Button */
+textarea.fileupload_description {
+	width:490px;
+	height:60px;
+	margin:0;
+}
+/* Account view */
+a.permission_item
+{
+	text-decoration:none !important;
+	color:black;
+}
+p.permission_item
+{
+	border-top:1px solid blue;
+	border-bottom:1px solid blue;
+	margin-left:20px;
+	padding-left:10px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+	margin-top:0px;
+	margin-bottom:-1px;
+	padding-top:3px;
+	padding-bottom:5px;
+	margin-right:100px;
+	display:block;
+	cursor:pointer;
+}
+p.permission_item:hover
+{
+	border-top:1px solid blue;
+	border-bottom:1px solid blue;
+	margin-left:20px;
+	padding-left:10px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+	margin-top:0px;
+	margin-bottom:-1px;
+	padding-top:3px;
+	padding-bottom:5px;
+	margin-right:100px;
+	background-color:#AAA;
+	display:block;
+	cursor:pointer;
+}
+div.admin_delete_button
+{
+	display:inline-block;
+	margin:0;
+	padding:0;
+}
+div.admin_edit_button
+{
+	display:inline-block;
+	margin:0;
+	padding:0;
+}
+div.admin_publish_button
+{
+	display:inline-block;
+	margin:0;
+	padding:0;
+}
+div.admin_up_button
+{
+	display:inline-block;
+	margin:0;
+	padding:0;
+}
+div.admin_down_button
+{
+	display:inline-block;
+	margin:0;
+	padding:0;
+}
+/* Room Edit */
+div.roomedit_container
+{
+	border: 2px solid HSL(288,17%,43%);
+	background-color:#FFFFE5;
+	border-radius: 20px;
+	color:black;
+	height:240px;
+	margin-right:10px;
+	margin-top:10px;
+	padding:8px;
+	font-family: Verdana,Tahoma,Sans-serif;
+	font-size:12pt;	
+}
+div.roomedit_form_field
+{
+	border: 1px solid HSL(288,17%,43%);
+	border-radius: 5px;
+	color:black;
+	background-color:white;
+
+}
+div.roomedit_field_input
+{
+	color:black;
+	background-color:white;
+	margin:2px;
+	margin-left:10px;
+}
+p.roomedit_field_label
+{
+	margin:0;
+	padding:3px;
+	width:120px;
+}
+input.roomedit_field_input
+{
+	color:black;
+	background-color:white;	
+	margin:0px;
+	margin-left:0px;
+	width:180px;
+	display:inline-block;
+}
+div.roomedit_left
+{
+	width:340;
+}
+div.roomedit_center
+{
+	width:390
+}
+div.roomedit_right
+{
+	width:20;
+}
+div.edit_room_description_form_field
+{
+	border: 1px solid HSL(288,17%,43%);
+	border-radius: 5px;
+	color:black;
+	background-color:white;
+}
+p.edit_room_description_field_label
+{
+	margin:0;
+	padding:3px;
+}
+textarea.edit_room_description_field_input
+{
+	width:338;
+	height:100;
+	margin:0;
+	padding:0;
+}
+div.deleteroom_button
+{
+	margin-top: 30px;
+	margin-left: 380px;
+	display:inline-block;
+}
+input.roomedit
+{
+	margin-top:0px;
+	margin-bottom:0px;
+	width:720px;
+	padding:5px 10px; 
+	background:#ccc; 
+	border:1px solid black;
+    cursor:pointer;
+    border-radius: 5px;
+    font-family:Verdana,Tahoma,Sans-serif;
+    font-weight:bold;
+    color:black;
+}
+div.registration_list
+{
+  border-top: none;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  margin-top: 1px;
+  margin-left: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color:orange;
+}
+p.registration_entry
+{
+	font-family: Verdana,Tahoma,Sans-serif;
+	font-size: 10pt;
+	margin-top: 2px;
+	padding: 0;
+	margin-left: 5px;
+	margin-bottom: 3px;
+}
+p.registration_item
+{
+	border-top:1px solid blue;
+	border-bottom:1px solid blue;
+	margin-left:20px;
+	padding-left:10px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+	margin-top:0px;
+	margin-bottom:-1px;
+	padding-top:3px;
+	padding-bottom:5px;
+	margin-right:0px;
+	display:block;
+	cursor:pointer;
+}
+p.registration_item:hover
+{
+	border-top:1px solid blue;
+	border-bottom:1px solid blue;
+	margin-left:20px;
+	padding-left:10px;
+	font-family:Verdana,Tahoma,Sans-serif;
+	font-size:12;
+	margin-top:0px;
+	margin-bottom:-1px;
+	padding-top:3px;
+	padding-bottom:5px;
+	background-color:#AAA;
+	display:block;
+	cursor:pointer;
+}
+div.edit_promo_desc_form_field
+{
+
+}
+div.edit_promo_desc_field_label
+{
+  width: 255px;
+}
+p.edit_promo_desc_field_label
+{
+  font-family: Verdana,Tahoma,Sans-serif;
+  font-weight: bold;
+  margin: 0;
+  padding: 2px;
+  text-align: right;
+}
+div.edit_promo_desc_field_input
+{
+	    width: 475px;
+  text-align: right;
+}
+textarea.edit_promo_desc_field_input
+{
+  width: 220px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+div.datereminder
+{
+	margin: 0;
+	padding: 0;
+	margin-top: -10px;
+}
+p.datereminder
+{
+	margin: 0;
+	margin-left: 240px;
+	margin-bottom: 16px;
+	font-family: verdana,tahoma,sans-serif;
+	font-size: 10pt;
+}

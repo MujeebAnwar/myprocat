@@ -1,0 +1,225 @@
+/* Menu Object */
+div.menu_bar {
+    position: absolute;
+    top: 0;
+    z-index: 200;
+    width:100%
+}
+div.menu_h_box {
+    background-color: rgba(0,0,0,0);
+    margin: 0px;
+    height: 30px;
+    display: inline-block;
+    padding: 0px;
+    position: relative;
+}
+div.menu_right {
+    float:right;
+    margin-right:0;
+}
+div.menu_h_box.menu_right ul li ul {
+    right: 30px;
+    left:unset;
+}
+div.menu_h_box a {
+    text-decoration: none !important;
+    color: orange;
+}
+div.menu_h_box ul {
+    text-align: left;
+    display: inline;
+    margin: 0;
+    padding: 0px 0px 0px 0px;
+    list-style: none;
+    z-index: 9995;
+    background: black;
+    text-decoration: underline;
+}
+li.account_menu::before, li.login_menu::before {
+    content: attr(login_display)
+}
+div.login_enclosure li.account_menu {
+    display: none;
+}
+div.login_enclosure[state='logged_in'] li.account_menu {
+    display: inline;
+}
+
+div.login_enclosure li.login_menu {
+    display: inline;
+}
+
+div.login_enclosure[state='logged_in'] li.login_menu {
+    display: none;
+}
+div.menu_h_box ul li.login_menu_entry {
+    height: max-content;
+    min-width: max-content;
+}
+#loginForm div.form_field {
+    width:100%;
+}
+#loginForm p {
+    line-height:0;
+}
+#loginForm div.field_input{
+    float:right !important;
+}
+div.menu_h_box ul li {
+    font-size: 11.5pt;
+    display: inline-block;
+    margin-right: 0px;
+    position: relative;
+    padding: 5px 15px 5px 15px;
+    cursor: pointer;
+    float: left;
+    height: 20px;
+    z-index: 9996;
+    background: rgba(0,0,0,0);
+    color: black;
+    border-bottom: 2px solid #444;
+    margin-right: 10px;
+}
+div.menu_h_box ul li ul li {
+    margin-right:0;
+    color:orange;
+}
+
+div.menu_h_box > ul > li > a {
+    color: black;
+}
+div.menu_h_box > li > a {
+    color: black;
+}
+    div.menu_h_box ul li:hover a, div.menu_h_box ul li:focus a {
+        color: orange;
+    }
+
+    div.menu_h_box ul li:hover, div.menu_h_box ul li::focus-within {
+        background: #444;
+        z-index: 9996;
+        color: orange;
+    }
+
+div.menu_h_box ul li ul {
+    padding: 0;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9997;
+}
+
+    div.menu_h_box ul li ul li {
+        background: black;
+        display: block;
+        color: orange;
+        border-bottom: 1px solid #444;
+        z-index: 9998;
+        width: 100%;
+        white-space: nowrap;
+    }
+
+        div.menu_h_box ul li ul li:hover, div.menu_h_box ul li ul li:focus-within {
+            background: #444;
+            z-index: 9998;
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+
+    div.menu_h_box ul li:hover ul, div.menu_h_box ul li:focus-within ul {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        z-index: 9997;
+    }
+
+div.menu_box {
+    background-color: HSL(288,17%,25%);
+    border: 2px solid HSL(288,17%,25%);
+    width: 150px;
+    margin-right: 10px;
+    margin-top: 10px;
+    min-height: 600px;
+    padding: 0;
+}
+
+p.menu_header {
+    background-color: HSL(288,17%,25%);
+    font: 12px/18px sans-serif;
+    display: block;
+    color: white;
+    width: 146px;
+    padding: 5px 0px 0px 0px;
+    margin: 0;
+    text-align: center;
+    border-bottom: 1px solid HSL(288,17%,30%);
+}
+
+a.menu {
+    text-decoration: none !important;
+    color: yellow;
+}
+
+ul.menu {
+    text-align: left;
+    display: inline;
+    margin: 0;
+    padding: 0px 0px 0px 0px;
+    list-style: none;
+    z-index: 9995;
+    background: HSL(288,17%,75%);
+}
+
+    ul.menu li.menu {
+        font: 12px/18px sans-serif;
+        display: inline-block;
+        margin-right: -4px;
+        position: relative;
+        padding: 5px 5px 5px 5px;
+        background: #fff;
+        cursor: pointer;
+        width: 140px;
+        z-index: 9996;
+        background: HSL(288,17%,25%);
+        border-bottom: 1px solid HSL(288,17%,30%);
+    }
+
+        ul.menu li.menu:hover {
+            background: HSL(288,17%,50%);
+            z-index: 9996;
+        }
+
+        ul.menu li.menu ul.menu {
+            padding: 0;
+            position: absolute;
+            top: 0px;
+            left: 150px;
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 9997;
+        }
+
+            ul.menu li.menu ul.menu li.menu {
+                background: HSL(288,17%,25%);
+                display: block;
+                color: yellow;
+                width: 150px;
+                z-index: 9998;
+            }
+
+                ul.menu li.menu ul.menu li.menu:hover {
+                    background: HSL(288,17%,50%);
+                    z-index: 9998;
+                }
+
+        ul.menu li.menu:hover ul.menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            z-index: 9997;
+        }

@@ -1,0 +1,167 @@
+
+div.button {
+    display:inline-block;
+    position:relative;
+    cursor:pointer;
+    font-size:140%;
+    padding: 1px;
+    transition-duration: .2s;
+    transition-property: background, border, box-shadow, color;
+}
+div.button > p
+{
+    font-family: "Segoe UI Symbol",BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-top: -0.2ch;
+    margin-left: 0.25ch;
+    margin-right: 0.25ch;
+    margin-bottom: 0px;
+    display: inline-block;
+}
+div.button::after{
+    content: attr(button_display);
+}
+div.tooltip
+{
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: 3px 3px 5px black;
+    background-color: #FAF0F0;
+    position: absolute;
+    visibility: hidden;
+    padding: 3px;
+    z-index: 1000;
+    white-space: nowrap;
+    bottom: 2em;
+    right: -1ch;
+}
+
+div.tooltip > p
+{
+    font-size: 12pt;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 5px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    height:100%;
+    color:black;
+
+}
+div.tooltip::after
+{
+    content: ' ';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #FAF0F0;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    box-shadow: 3px 3px 2px black;
+    transform: rotate(45deg);
+    display: inline-block;
+    top: calc(100% - 5px);
+    left: calc(100% - 2ch - 5px);
+}
+[tiphalign=right] > div.tooltip
+{
+    right:unset;
+    left:-1ch;
+}
+
+[tiphalign=right] > div.tooltip::after
+{
+    left:unset;
+    right:calc(100% - 2ch - 5px);
+}
+[tipvalign=bottom] > div.tooltip {
+    top: calc(100% + 5px);
+    bottom: unset;
+}
+[tipvalign=bottom] > div.tooltip::after {
+    top: unset;
+    transform: rotate(225deg);
+    bottom: calc(100% - 5px);
+    box-shadow: unset;
+}
+.button:hover > .tooltip
+{
+    visibility:visible;
+}
+div:hover > .tooltip
+{
+    visibility:visible;
+}
+p:hover > .tooltip
+{
+    visibility:visible;
+    left: unset;
+    right: 0%;
+}
+div.arrowButton,
+div.defaultButton {
+    background: #14aaf5;
+    border: 0px solid black;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12pt;
+    color: white;
+    width: 2ch;
+    display: inline-block;
+    margin-left: 5%;
+    text-align: center;
+}
+.defaultButton >*:first-child
+{
+    text-align:center;
+}
+.defaultButton > *
+{
+    text-align:initial;
+}
+.defaultButton > label {
+    width: 100%;
+    text-align: center;
+}
+.tooltip
+{
+    width:initial;
+}
+div.detailsTooltip
+{
+/* background: #14aaf5; */
+border: 0px solid black;
+cursor: pointer;
+width: 2ch;
+text-align: center;
+display: inline-block;
+font-size:14pt !important;
+}
+div.detailsTooltip:hover {
+    box-shadow: 0 0 10px 0px #14aaf5 !important;
+} 
+.tooltip p{
+    text-align:left;
+}
+
+div.arrowButton:hover,
+div.defaultButton:hover {
+    box-shadow: 0 0 10px 0px #14aaf5 !important;
+} 
+div.pillButton
+{
+    height: 2ch;
+    width: 2ch;
+    border-radius: 50%;
+    border: 0px solid black;
+}
+div.pillButton::after
+{
+    content: " ";
+    border-radius: 50%;
+    background: radial-gradient(farthest-side at 40% 30%, rgba(255,255,255,.6), rgba(255,255,255,.4) 20%, rgba(0,0,0,.0) 80%, rgba(0,0,0,.2));
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+}
