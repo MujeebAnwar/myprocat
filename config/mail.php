@@ -2,23 +2,23 @@
 
 return [
 
-    // SMTP Server Host
-    'host' => 'mail.depodash.com',
+   'host' => 'localhost',
 
     // SMTP Port: 587 (TLS), 465 (SSL)
-    'port' => 465,
+    'port' => 1025,
 
     // Encryption type: tls or ssl
-    'encryption' => 'ssl',
+    'encryption' => '',
 
     // Username for SMTP login
-    'username' => 'no-reply@depodash.com',
+    'username' => '',
 
     // App Password or SMTP Password
-    'password' => 'Ytrewq%5$4#3@2',
+    'password' => '',
 
     // Default FROM email & name
-    'from_email' => 'no-reply@depodash.com',
-    'from_name'  => 'DepoDash',
+    'from_email' => 'test@test.com',
+    'from_name'  => 'MyProCat',
     'sales_email' => 'cs@procat.com',
+    'invoice_cc_email' => 'cs@procat.com',
 ];

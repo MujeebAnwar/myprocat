@@ -59,5 +59,5 @@ if($Session->valid && $UserAccount->logged_in && $UserAccount->user_details['is_
 	}
 }
 $set_title = "Myprocat.com: Resource Rooms";
-require_once (DOCUMENT_ROOT.'/templateV2/mainframe.php');
+require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

@@ -57,5 +57,5 @@ if($Session->valid && $UserAccount->logged_in && $UserAccount->user_details['is_
 $set_body = new edit_room($UserAccount, $DB, $currentRoom);
 $breadcrumb_items[] = ['text' => $currentRoom['room_title'], 'url' => 'resource_detail.php?id=' . $currentRoom['id_room']];
 $set_title = "Myprocat.com: Edit Room";
-require_once (DOCUMENT_ROOT.'/templateV2/mainframe.php');
+require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

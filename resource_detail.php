@@ -29,13 +29,13 @@ if(is_array($_GET) && array_key_exists('id',$_GET) && is_numeric($_GET['id']))
 	// Update breadcrumb and title with room name
 	$room_title = !is_null($set_body->vis_title) && $set_body->vis_title !== "" ? $set_body->vis_title : $set_body->title;
 	$breadcrumb_items[] = $room_title;
-	$set_title = "DepoDash Resource Center - " . $room_title;
+	$set_title = "ProCAT Resource Center - " . $room_title;
 } else {
 	$set_body = new paragraph("Please provide a room ID to view files.", array('class' => 'importantmessage'));
 	$breadcrumb_items[] = "Error";
-	$set_title = "DepoDash Resource Center - Error";
+	$set_title = "ProCAT Resource Center - Error";
 }
 
 // Render the page
-require_once (DOCUMENT_ROOT.'/templateV2/mainframe.php');
+require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

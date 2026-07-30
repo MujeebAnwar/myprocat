@@ -89,5 +89,5 @@ if($Session->valid && $UserAccount->logged_in && $UserAccount->user_details['is_
 	$set_body = new paragraph("You do not have permission to use this page.");
 }
 
-require_once (DOCUMENT_ROOT.'/templateV2/mainframe.php');
+require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

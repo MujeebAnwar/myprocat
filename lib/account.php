@@ -85,6 +85,18 @@ WHERE accounts.id_user = ? AND (accounts.expires + INTERVAL 3 DAY) > NOW()',
 			$this->password_history = $pwdResults;
 		}
 	}
+	// Returns one of "Lite" (Depodash user or myprocat user with no winner license), "Student", "Professional" or False if the account object has not been populated
+	public function myprocat_license() {
+		if(array_key_exists('myprocat_license',$this->user_details) && $this->user_details['myprocat_license'])
+			return $this->user_details['myprocat_license'];
+		return false;
+	}
+	// True if this is a myprocat subscription
+	public function myprocat_subscription() {
+		if(array_key_exists('myprocat_subscription',$this->user_details))
+			return !!$this->user_details['myprocat_subscription'];
+		return false;
+	}
 	private function populate_object($by = NULL,$data = NULL)
 	{
 		$results = NULL;
@@ -109,6 +121,48 @@ WHERE accounts.id_user = ? AND (accounts.expires + INTERVAL 3 DAY) > NOW()',
 			return false;
 		} else {
 			$this->user_details = $results[0];
+
+			//if($this->user_details['acct_type'] == 'myprocat')
+			{
+				$this->user_details['myprocat_license'] = 'Lite';
+				$this->user_details['myprocat_subscription'] = NULL;
+					
+				//error_log("Myprocat Account type getting winner license: ".$this->user_details['id_user']);
+				$r = ['myprocat_license','myprocat_subscription'];
+				if(FALSE !== $this->DB->sql(<<<SQL
+				SELECT
+				IF(rooms.room_title = "Student", "Student", "Professional") AS license,
+				CASE WHEN EXISTS
+				(SELECT 1
+				FROM rooms
+				LEFT JOIN room_permissions ON rooms.id_room = room_permissions.id_room
+				WHERE rooms.room_title = 'Subscription Accounts'
+				AND room_permissions.can_read = 1
+				AND room_permissions.id_user = accounts.id_user)
+				THEN 1 ELSE 0 END
+				AS subscription
+				FROM accounts
+				LEFT JOIN room_permissions ON accounts.id_user = room_permissions.id_user
+				LEFT JOIN rooms ON room_permissions.id_room = rooms.id_room
+				WHERE accounts.id_user = ?
+				AND room_permissions.can_read = 1
+				AND rooms.keyless_access = 1
+				AND rooms.room_title IN ('Winner XP', 'Winner VR', 'Student')
+				AND (accounts.expires + INTERVAL 3 DAY) > NOW()
+				ORDER BY FIELD(rooms.room_title, 'Winner XP', 'Winner VR', 'Student')
+				LIMIT 1
+				SQL
+				,['s',$this->user_details['id_user']]
+				,$r))
+				{
+					if(count($r) > 0)
+					{
+						$this->user_details['myprocat_license'] = $r[0]['myprocat_license'];
+						$this->user_details['myprocat_subscription'] = $r[0]['myprocat_subscription'];
+					}
+				}
+			}
+
 			$this->get_passwords($results[0]['id_user']);
 			return true;
 		}

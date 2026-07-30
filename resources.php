@@ -15,7 +15,7 @@ if(is_null($UserAccount) || !is_a($UserAccount,'useraccount') || !$UserAccount->
 	// 	new roomlist($UserAccount,$DB)
 	// 	);
 
-	header('Location: login.php');
+	header('Location: /signup/login.php');
 	exit;
 } else {
 	$set_body = new roomlist($UserAccount,$DB);
@@ -68,5 +68,5 @@ if(isset($_POST['action']) && isset($_POST['id_room']) && $_POST['action'] === '
 }
 
 $set_title = "Myprocat.com: Resource Rooms";
-require_once (DOCUMENT_ROOT.'/templateV2/mainframe.php');
+require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

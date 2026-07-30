@@ -1,4 +1,4 @@
-/* DepoDash Resource Center Styles */
+/* ProCAT Resource Center Styles */
 
 /* Reset and base styles */
 @import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
@@ -572,6 +572,8 @@ body {
     padding: 15px 30px;
     font-family: "Montserrat", sans-serif;
     width: 100%;
+    align-self: stretch;
+    box-sizing: border-box;
     /* max-width: 1000px; */
     margin: 0 auto 20px auto;
     position: sticky;
@@ -581,8 +583,10 @@ body {
     /* margin-left: 160px; */
 }
 
-.breadcrumb-item {
-    color: #666;
+.breadcrumb-item,
+.breadcrumb-item:link,
+.breadcrumb-item:visited {
+    color: #1a365d;
     text-decoration: none;
     cursor: pointer;
     font-size: 14px;
@@ -593,13 +597,15 @@ body {
     color: #ff6600;
 }
 
-.breadcrumb-item.active {
-    color: #333;
+.breadcrumb-item.active,
+.breadcrumb-item.active:link,
+.breadcrumb-item.active:visited {
+    color: #1a365d;
     font-weight: 600;
 }
 
 .breadcrumb-separator {
-    color: #999;
+    color: #1a365d;
     margin: 0 8px;
     font-weight: 500;
 }
@@ -1997,5 +2003,21 @@ body {
 .banner{
     background-color: #1a365d;
     padding: 30px;
-    color: white;
+    color: #ffffff;
+    width: 100%;
+    align-self: stretch;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.banner h1{
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 700;
 }

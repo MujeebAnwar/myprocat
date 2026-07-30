@@ -34,11 +34,21 @@ class EmailService
         );
     }
 
-    public function send($to, $subject, $body,$sendEmailToSales = true)
+    public function send($to, $subject, $body, $sendEmailToSales = true, $cc = null)
     {
         try {
             $this->mail->clearAddresses();
+            $this->mail->clearCCs();
             $this->mail->addAddress($to);
+
+            if (!empty($cc)) {
+                $ccAddresses = is_array($cc) ? $cc : array($cc);
+                foreach ($ccAddresses as $ccEmail) {
+                    if (!empty($ccEmail)) {
+                        $this->mail->addCC($ccEmail);
+                    }
+                }
+            }
 
             $this->mail->isHTML(true);
             $this->mail->Subject = $subject;
@@ -46,8 +56,9 @@ class EmailService
 
             $this->mail->send();
 
-            if($sendEmailToSales){
+            if ($sendEmailToSales) {
                 $this->mail->clearAddresses();
+                $this->mail->clearCCs();
                 $this->mail->addAddress($this->config['sales_email']);
                 $this->mail->Subject = $subject;
                 $this->mail->Body    = $body;
