@@ -1,0 +1,364 @@
+/* Renew Support — package tabs + tier cards */
+
+.renew-support-page {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 20px 40px;
+	box-sizing: border-box;
+	font-family: "Montserrat", sans-serif;
+}
+
+.renew-support-header {
+	text-align: center;
+	margin-bottom: 24px;
+}
+
+.renew-support-header h1 {
+	font-size: 28px;
+	color: #27475f;
+	margin: 0 0 8px 0;
+}
+
+.renew-support-header p {
+	color: #666;
+	max-width: 640px;
+	margin: 0 auto;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.renew-support-notice {
+	text-align: center;
+	margin-bottom: 20px;
+	padding: 12px 16px;
+	border-radius: 6px;
+	font-size: 14px;
+}
+
+.renew-support-notice--success {
+	background: #eef8f0;
+	color: #1e6b34;
+	border: 1px solid #c6e6ce;
+}
+
+.renew-support-notice--error {
+	background: #fdf0f0;
+	color: #a33;
+	border: 1px solid #f0c8c8;
+}
+
+.renew-support-separator {
+	height: 1px;
+	background: #e0e0e0;
+	margin: 0 0 28px 0;
+}
+
+.renew-support-section-title {
+	font-size: 18px;
+	color: #27475f;
+	margin: 0 0 14px 0;
+	font-weight: 600;
+}
+
+.renew-support-licenses {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 32px;
+}
+
+.renew-support-license-chip {
+	background: #F6F7FB;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 10px 14px;
+	min-width: 140px;
+}
+
+.renew-support-license-chip .chip-title {
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	color: #27475f;
+}
+
+.renew-support-license-chip .chip-meta {
+	display: block;
+	font-size: 12px;
+	color: #888;
+	margin-top: 4px;
+}
+
+.renew-support-empty {
+	text-align: center;
+	padding: 40px 20px;
+	background: #F6F7FB;
+	border-radius: 12px;
+	border: 1px solid #e0e0e0;
+}
+
+.renew-support-empty p {
+	color: #666;
+	margin: 0 0 16px 0;
+	font-size: 14px;
+}
+
+.renew-support-empty a {
+	color: #ff6600;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.renew-support-empty a:hover {
+	text-decoration: underline;
+}
+
+/* Package tabs */
+.renew-support-tabs {
+	margin-bottom: 24px;
+}
+
+.renew-support-tablist {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	border-bottom: 2px solid #e0e0e0;
+	margin-bottom: 28px;
+	padding-bottom: 0;
+}
+
+.renew-support-tab {
+	appearance: none;
+	background: transparent;
+	border: none;
+	border-bottom: 3px solid transparent;
+	margin-bottom: -2px;
+	padding: 12px 18px;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: 600;
+	color: #666;
+	cursor: pointer;
+	max-width: 100%;
+	text-align: left;
+	line-height: 1.35;
+	transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.renew-support-tab:hover {
+	color: #27475f;
+}
+
+.renew-support-tab.is-active {
+	color: #ff6600;
+	border-bottom-color: #ff6600;
+}
+
+.renew-support-tabpanel {
+	display: none;
+}
+
+.renew-support-tabpanel.is-active {
+	display: block;
+}
+
+.renew-support-tabpanel-header {
+	text-align: center;
+	margin-bottom: 24px;
+}
+
+.renew-support-tabpanel-header .panel-plan {
+	font-size: 13px;
+	color: #999;
+	margin-bottom: 6px;
+}
+
+.renew-support-tabpanel-header h3 {
+	margin: 0 0 8px 0;
+	font-size: 22px;
+	color: #27475f;
+}
+
+.renew-support-tabpanel-header p {
+	margin: 0;
+	font-size: 13px;
+	color: #666;
+	line-height: 1.45;
+}
+
+/* Tier cards: Standard / Extended / Premier
+   Cards stay a fixed comfortable width and center as a group
+   whether there are 1, 2, or 3 tiers. */
+.renew-support-cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	gap: 24px;
+	margin: 0 auto 24px;
+	max-width: 1080px;
+}
+
+.renew-support-card {
+	background: #fff;
+	border-radius: 16px;
+	padding: 28px 22px 22px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+	border: 1px solid #e0e0e0;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 320px;
+	flex: 0 1 320px;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Single tier: slightly wider, still centered — not full page width */
+.renew-support-cards--count-1 .renew-support-card {
+	max-width: 360px;
+	flex-basis: 360px;
+}
+
+/* Two tiers: keep side-by-side card size, centered as a pair */
+.renew-support-cards--count-2 .renew-support-card {
+	max-width: 320px;
+	flex-basis: 320px;
+}
+
+/* Three tiers: equal cards filling the row */
+.renew-support-cards--count-3 {
+	max-width: 1040px;
+}
+
+.renew-support-cards--count-3 .renew-support-card {
+	max-width: 320px;
+	flex-basis: 300px;
+}
+
+.renew-support-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.renew-support-card--accent {
+	border-color: #ff6600;
+}
+
+.renew-support-badge {
+	position: absolute;
+	top: -12px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #fff;
+	padding: 4px 16px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 600;
+	white-space: nowrap;
+	background: #ff6600;
+}
+
+.renew-support-card h3 {
+	margin: 8px 0 6px 0;
+	font-size: 22px;
+	color: #27475f;
+	text-align: center;
+}
+
+.renew-support-card .card-price {
+	text-align: center;
+	font-size: 32px;
+	font-weight: 700;
+	color: #27475f;
+	margin: 8px 0 10px 0;
+}
+
+.renew-support-card .card-addon-label {
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+	color: #27475f;
+	margin: -12px 0 20px 0;
+}
+
+.renew-support-card .card-features {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 24px 0;
+	flex: 1;
+}
+
+.renew-support-card .card-features li {
+	padding: 8px 0;
+	font-size: 13px;
+	color: #555;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.renew-support-card .card-actions {
+	margin-top: auto;
+	text-align: center;
+}
+
+.renew-support-select-btn {
+	display: inline-block;
+	width: 100%;
+	padding: 12px 24px;
+	box-sizing: border-box;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 16px;
+	font-weight: 600;
+	background: #ff6600;
+	color: #fff;
+	transition: background-color 0.2s;
+}
+
+.renew-support-select-btn:hover {
+	background: #e55a00;
+}
+
+.renew-support-select-btn:active {
+	background: #cc5000;
+}
+
+.renew-support-selection-summary {
+	margin-top: 8px;
+	padding: 16px 20px;
+	background: #F6F7FB;
+	border-radius: 8px;
+	border: 1px solid #e0e0e0;
+	text-align: center;
+	font-size: 14px;
+	color: #27475f;
+}
+
+.renew-support-selection-summary strong {
+	color: #ff6600;
+}
+
+@media (max-width: 900px) {
+	.renew-support-card,
+	.renew-support-cards--count-1 .renew-support-card,
+	.renew-support-cards--count-2 .renew-support-card,
+	.renew-support-cards--count-3 .renew-support-card {
+		max-width: 400px;
+		flex-basis: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.renew-support-header h1 {
+		font-size: 24px;
+	}
+
+	.renew-support-tab {
+		font-size: 13px;
+		padding: 10px 12px;
+	}
+}

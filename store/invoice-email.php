@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DepoDash Invoice Email</title>
+    <title>MyProCat Invoice Email</title>
     <!-- Inline styles only for email client compatibility -->
 </head>
 <body style="margin:0; padding:0; background-color:#f5f7fa;">
@@ -21,11 +21,11 @@
             <tr>
               <td style="text-align:center;">
                 <!-- Inline SVG logo to avoid external requests in email clients -->
-                <img style="height: 50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOHTAekTL0-95EVIkVT_P3GW3_PDElWqr83A&s" alt="">
+                <img style="height: 50px;" src="/templateV2/mainframe/img/logo.png" alt="">
                 <div style="margin-top:10px; color:#666; font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:18px;">
                   Calabasas, CA 91302<br>
                   (818) 222-6600<br>
-                  <a href="mailto:cs@depodash.com" style="color:#1a365d; text-decoration:none;">cs@depodash.com</a>
+                  <a href="mailto:cs@myprocat.com" style="color:#1a365d; text-decoration:none;">cs@myprocat.com</a>
                 </div>
               </td>
             </tr>
@@ -90,7 +90,7 @@
                   </tr>
                   <!-- Item row -->
                   <tr>
-                    <td colspan="3" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; padding:14px 16px; border-left:1px solid #e9ecef; border-right:1px solid #e9ecef;">Transcription (hours)</td>
+                    <td colspan="3" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; padding:14px 16px; border-left:1px solid #e9ecef; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars(!empty($invoiceData['service_description']) ? $invoiceData['service_description'] : 'Transcription (hours)'); ?></td>
                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; text-align:center; padding:14px 8px; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars($invoiceData['hours'] ?? '0'); ?></td>
                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; text-align:center; padding:14px 8px; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars($invoiceData['rate'] ?? '0.00'); ?></td>
                   </tr>
@@ -134,16 +134,16 @@
         <td style="padding:20px 24px 10px 24px;">
           <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#111; line-height:22px;">
             If you have any questions or need assistance, our support team is here to help.
-            Simply reply to this email or contact us at <a href="mailto:cs@depodash.com" style="color:#ff6600; text-decoration:none;">cs@depodash.com</a>.
+            Simply reply to this email or contact us at <a href="mailto:cs@myprocat.com" style="color:#ff6600; text-decoration:none;">cs@myprocat.com</a>.
           </div>
           <div style="height:8px; line-height:8px; font-size:8px;">&nbsp;</div>
           <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#111; line-height:22px;">
-            We appreciate your trust in DepoDash and look forward to supporting your transcription and reporting needs.
+            We appreciate your trust in MyProCat and look forward to supporting your transcription and reporting needs.
           </div>
           <div style="height:16px; line-height:16px; font-size:16px;">&nbsp;</div>
           <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#111; line-height:22px;">
             Best regards,<br>
-            The DepoDash Team
+            The MyProCat Team
           </div>
           <div style="height:24px; line-height:24px; font-size:24px;">&nbsp;</div>
         </td>

@@ -469,7 +469,7 @@ function openViewInvoiceModal(el){
             overlay.style.display = "flex";
         }
 
-        fetch("/subscription/view_invoice.php?invoice_number=" + encodeURIComponent(invoiceId) + "&modal=1")
+        fetch("/invoices/view_invoice.php?invoice_number=" + encodeURIComponent(invoiceId) + "&modal=1")
             .then(function(response){
                 return response.text().then(function(html){
                     if(!response.ok){

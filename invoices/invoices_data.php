@@ -98,6 +98,7 @@ class invoices extends content_block
 				casepad_payment_invoices.invoice_number LIKE ? OR
 				myprocat_purchases.license_title LIKE ? OR
 				casepad_minutes_credits.source LIKE ? OR
+				renew_support_orders.notes LIKE ? OR
 				CONCAT(accounts.first_name, " ", accounts.last_name) LIKE ? OR
 				CONCAT(casepad_accounts.first_name, " ", casepad_accounts.last_name) LIKE ? OR
 				CONCAT(accounts.first_name, " ", accounts.last_name) LIKE ? OR
@@ -106,7 +107,7 @@ class invoices extends content_block
 				casepad_accounts.email LIKE ?
 			)';
 			$searchTerm = '%' . $textFilter . '%';
-			$textParams = array($searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm);
+			$textParams = array($searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm);
 		}
 		
 		$baseQuery = <<<SQL
@@ -114,7 +115,10 @@ SELECT
 	casepad_payment_invoices.id as invoice_id,
 	casepad_payment_invoices.invoice_number,
 	casepad_payment_invoices.invoice_date,
-	IFNULL(myprocat_purchases.license_title, casepad_minutes_credits.source) as `name`,
+	IFNULL(
+		renew_support_orders.notes,
+		IFNULL(myprocat_purchases.license_title, casepad_minutes_credits.source)
+	) as `name`,
 	casepad_payment_invoices.rate,
 	casepad_minutes_credits.minutes, 
 	casepad_storage_credits.storage,
@@ -139,6 +143,8 @@ SELECT
 FROM casepad_payment_invoices
 LEFT JOIN myprocat_purchases
 	ON myprocat_purchases.id = casepad_payment_invoices.myprocat_purchase_id
+LEFT JOIN renew_support_orders
+	ON renew_support_orders.transaction_id = casepad_payment_invoices.transaction_id
 LEFT JOIN casepad_minutes_credits
 	ON casepad_minutes_credits.invoice_id = casepad_payment_invoices.id
 LEFT JOIN casepad_storage_credits

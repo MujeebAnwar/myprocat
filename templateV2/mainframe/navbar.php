@@ -60,14 +60,25 @@ class navbar extends content_block
 			}
 
 			$navList->push(new content_block(
-				new anchor('Invoices', array('href' => '/invoices/')),
+				new anchor('Renew Support', array('href' => '/renew_support/')),
 				'li'
 			));
 
 			$navList->push(new content_block(
-				new anchor('My ROOMS', array('href' => '/resources.php')),
+				new anchor('Support', array('href' => '/contact.php')),
 				'li'
 			));
+
+			$navList->push(new content_block(
+				new anchor('Lexi', array('href' => 'https://procat.com/etc/lexi','target' => '_blank')),
+				'li'
+			));
+
+			$navList->push(new content_block(
+				new anchor('Invoices', array('href' => '/invoices/')),
+				'li'
+			));
+
 			$navList->push(new content_block(
 				new anchor('RESOURCES', array('href' => '/resources.php')),
 				'li'
