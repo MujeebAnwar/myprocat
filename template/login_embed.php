@@ -29,7 +29,7 @@ class login_embed extends content_block
 					if(strlen($Session->error))
 					{
 						$content->push(new paragraph("Error: ".$Session->error,array('class' => 'errormessage','style' => 'font-size: 13pt')));
-						$form = new form(NULL,array('method' => 'POST','id'=>'forgotpassword','action' => '/forgotpassword.php'));
+						$form = new form(NULL,array('method' => 'POST','id'=>'forgotpassword','action' => '/signup/forgotpassword.php'));
 						$form->push(new input(NULL,array('type'=>'hidden','name'=>'email','value'=>$_POST['Email'])));
 						$form->push(new submit('Forgot your password? click here.',array('class' => 'forgotpasswordlink')));
 						$content->push($form);

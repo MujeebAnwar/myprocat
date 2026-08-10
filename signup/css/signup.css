@@ -1,0 +1,197 @@
+/* ── Login form ── */
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.signup-form-column {
+    max-width: 500px;
+    width: 100%;
+}
+
+.contact-form-column {
+    max-width: 640px;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.signup-field-row {
+    display: flex;
+    gap: 12px;
+}
+
+.signup-field-row .signup-field {
+    flex: 1;
+    min-width: 0;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e000;
+    border-radius: 6px;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    background-color: #F6F7FB;
+    height: 50px;
+    box-sizing: border-box;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #ff6600;
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+}
+
+.input-field::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+textarea.input-field,
+.input-textarea {
+    height: auto;
+    min-height: 220px;
+    resize: vertical;
+    line-height: 1.5;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.signup-field {
+    position: relative;
+}
+
+.signup-field .input-field:not(.input-textarea) {
+    padding-right: 44px;
+}
+
+.signup-field-row .signup-field .input-field {
+    padding-right: 15px;
+}
+
+.signup-field .input-textarea {
+    padding-right: 15px;
+}
+
+.signup-field .field-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #999;
+    pointer-events: none;
+}
+
+.login-forgot-link {
+    text-align: right;
+    margin-top: -4px;
+}
+
+.login-forgot-link a {
+    font-size: 16px;
+    color: #1a365d;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.login-forgot-link a:hover {
+    color: #ff6600;
+    text-decoration: underline;
+}
+
+.signup-submit-btn {
+    width: 100%;
+    max-width: 280px;
+    margin: 24px auto 0;
+    padding: 12px 24px;
+    background-color: #c8c8c8;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: block;
+}
+
+.signup-submit-btn:hover {
+    background-color: #ff6600;
+}
+
+.signup-submit-btn:active {
+    background-color: #e55a00;
+}
+
+.signup-submit-btn.active {
+    background-color: #ff6600;
+}
+
+.signup-error {
+    color: red;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+    min-height: 20px;
+}
+
+.signup-hint {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.45;
+    margin: 0 0 4px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: #666;
+}
+
+.password-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 480px) {
+    .signup-field-row {
+        flex-direction: column;
+    }
+
+    .signup-submit-btn {
+        max-width: 100%;
+    }
+}
+
+.forgot-password-hint {
+    font-size: 14px;
+    color: #ff6600;
+    line-height: 1.45;
+    margin: 0 0 10px;
+    font-weight: bold;
+}

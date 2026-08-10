@@ -14,7 +14,7 @@ if(is_array($_POST) && array_key_exists('Email',$_POST))
 		if(strlen($Session->error))
 		{
 			$set_body = new paragraph("Error: ".$Session->error,array('class' => 'errormessage'));
-			$form = new form(NULL,array('method' => 'POST','id'=>'forgotpassword','action' => '/forgotpassword.php'));
+			$form = new form(NULL,array('method' => 'POST','id'=>'forgotpassword','action' => '/signup/forgotpassword.php'));
 			$form->push(new input(NULL,array('type'=>'hidden','name'=>'email','value'=>$_POST['Email'])));
 			$form->push(new submit('Forgot your password? click here.',array('class' => 'forgotpasswordlink')));
 			$set_body->push($form);
@@ -25,14 +25,9 @@ if(is_array($_POST) && array_key_exists('Email',$_POST))
 	if($Session->valid)
 	{
 		$Session->Log_Out();
-		$set_body = new paragraph("You are now logged out.",array('class' => 'message'));
-	} else {
-		$set_body = new paragraph("Please log in, or use the public links in the menu to continue",array('class' => 'message'));
-		$form = new form(NULL,array('method' => 'POST','id'=>'forgotpassword','action' => '/forgotpassword.php'));
-		$form->push(new submit('New user or forgot your password? click here.',array('class' => 'forgotpasswordlink')));
-		$set_body->push($form);
 	}
-	
+	header('Location: /signup/login.php');
+	exit;
 }
 
 require_once (DOCUMENT_ROOT.'/template/mainframe.php');

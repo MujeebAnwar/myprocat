@@ -54,25 +54,51 @@ class databaseI
 			$bp = array();
 			if(is_array($bindparams) && count($bindparams)>1)
 			{
-				foreach ($bindparams as $key=>&$value) 
+				foreach ($bindparams as $key => &$value)
 				{
-            				$bp[$key] = &$value;
+					$bp[] = &$value;
 				}
-			
+				unset($value);
+
 				call_user_func_array(array($statement, "bind_param"), $bp);
 			}
-			if(!$statement->execute())
+			try
 			{
-				$this->error = "SQL error: ".$this->_DB->error."<br>In SQL: ".$sql;
+				if(!$statement->execute())
+				{
+					$this->error = "SQL error: ".$this->_DB->error."<br>In SQL: ".$sql;
+					$statement->close();
+					return false;
+				}
+			}
+			catch (mysqli_sql_exception $e)
+			{
+				// Preserve legacy false-return behavior under PHP 8+ mysqli exceptions.
+				$this->error = "SQL error: ".$e->getMessage()."<br>In SQL: ".$sql;
+				$statement->close();
 				return false;
 			}
 			if($copyresults != NULL)
 			{
-				foreach ($copyresults as $key=>&$value) 
+				// Map column names => bound variables (kept for result row keys).
+				// PHP 8+ treats string keys in call_user_func_array as named args,
+				// so bind_result must receive a numerically indexed reference list.
+				$rp = array();
+				foreach ($copyresults as $key => &$value)
 				{
-							$rp[$value] = &$value;
+					$colName = is_int($key) ? $value : $key;
+					$rp[$colName] = &$value;
 				}
-				call_user_func_array(array($statement, "bind_result"), $rp);
+				unset($value);
+
+				$bindResults = array();
+				foreach ($rp as &$bound)
+				{
+					$bindResults[] = &$bound;
+				}
+				unset($bound);
+
+				call_user_func_array(array($statement, "bind_result"), $bindResults);
 				$i = 0;
 				while($statement->fetch())
 				{

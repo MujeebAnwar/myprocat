@@ -1,6 +1,10 @@
 <?php
-require_once ('./config.php');
+require_once (DOCUMENT_ROOT.'/config.php');
 require_once DOCUMENT_ROOT.'/lib/database.php';
+
+/**
+ * Returns true when the request is allowed, false when the limit is exceeded.
+ */
 function rate_limiter($requester, $limit, $seconds_period)
 {
 	if ($requester == null) {
@@ -13,6 +17,9 @@ function rate_limiter($requester, $limit, $seconds_period)
 		throw new Exception("rate_limit: period param cannot be null");
 	}
 	global $DB;
+	if (is_null($DB)) {
+		$DB = new databaseI();
+	}
 	// get the ip address of the client, handling proxy headers if present
 	$ip = $_SERVER['REMOTE_ADDR'];
 	if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -20,7 +27,7 @@ function rate_limiter($requester, $limit, $seconds_period)
 	}
 	// ensure the IP address is a valid ipv4 or ipv6 address
 	if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6)) {
-		die('Error: Invalid IP address');
+		throw new Exception('Error: Invalid IP address');
 	}
 	// purge old limit history (for all clients)
 	if (false === $DB->sql(
@@ -59,11 +66,8 @@ SQL
 	if (count($data) === 1
 		&& $data[0]['limit_exceeded'])
 	{
-		// return an error message
-		http_response_code(429);
-		header('Retry-After: ' . $seconds_period);
-		die('Error: Rate limit exceeded');
+		return false;
 	}
-	// if you land here the limit has *NOT* been exceeded
+	return true;
 }
 ?>
