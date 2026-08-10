@@ -13,14 +13,8 @@ class invoices extends content_block
 
 	protected function getDateRangeCondition($dateRange, $fromDate, $toDate)
 	{
-		$today = date('Y-m-d');
-		
 		switch($dateRange) {
 			case 'today':
-				return array(
-					'condition' => ' AND DATE(casepad_payment_invoices.invoice_date) = ?',
-					'params' => array($today)
-				);
 			case 'last_24_hours':
 				$yesterday = date('Y-m-d', strtotime('-1 day'));
 				return array(

@@ -82,11 +82,13 @@ if ($sqlOk === false || !isset($invoiceRow[0]) || !is_array($invoiceRow[0]) || $
 $invoice = $invoiceRow[0];
 
 $renewSupportNotes = '';
+$renewExpiresAt = '';
+$renewPreviousExpiresAt = '';
 $transactionId = isset($invoice['transaction_id']) ? trim((string)$invoice['transaction_id']) : '';
 if ($transactionId !== '') {
-	$renewRows = array('notes');
+	$renewRows = array('notes', 'expires_at', 'rooms_granted_json');
 	$renewOk = @$DB->sql(
-		'SELECT notes
+		'SELECT notes, expires_at, rooms_granted_json
 		 FROM renew_support_orders
 		 WHERE transaction_id = ?
 		 LIMIT 1',
@@ -95,10 +97,27 @@ if ($transactionId !== '') {
 	);
 	if ($renewOk !== false) {
 		foreach ($renewRows as $row) {
-			if (is_array($row) && isset($row['notes']) && $row['notes'] !== 'notes' && $row['notes'] !== '') {
-				$renewSupportNotes = $row['notes'];
-				break;
+			if (!is_array($row) || !isset($row['notes']) || $row['notes'] === 'notes') {
+				continue;
 			}
+			if ($row['notes'] !== '') {
+				$renewSupportNotes = $row['notes'];
+			}
+			if (!empty($row['expires_at']) && $row['expires_at'] !== 'expires_at') {
+				$renewExpiresAt = $row['expires_at'];
+			}
+			if (!empty($row['rooms_granted_json']) && $row['rooms_granted_json'] !== 'rooms_granted_json') {
+				$roomsGranted = json_decode($row['rooms_granted_json'], true);
+				if (is_array($roomsGranted)) {
+					foreach ($roomsGranted as $roomGrant) {
+						if (!empty($roomGrant['previous_expires'])) {
+							$renewPreviousExpiresAt = $roomGrant['previous_expires'];
+							break;
+						}
+					}
+				}
+			}
+			break;
 		}
 	}
 }
@@ -174,6 +193,15 @@ if ($addressJson !== '' && empty($addressDetails)) {
 $serviceDescription = 'Transcription (hours)';
 if ($renewSupportNotes !== '') {
 	$serviceDescription = $renewSupportNotes;
+	// Older renew orders may only have expires_at; append a period line when missing.
+	if (strpos($serviceDescription, 'Service Period:') === false && $renewExpiresAt !== '') {
+		$periodStart = $renewPreviousExpiresAt !== '' ? $renewPreviousExpiresAt : $invoice['invoice_date'];
+		$startTs = strtotime($periodStart);
+		$endTs = strtotime($renewExpiresAt);
+		if ($startTs !== false && $endTs !== false) {
+			$serviceDescription .= "\nService Period: " . date('M j, Y', $startTs) . ' – ' . date('M j, Y', $endTs);
+		}
+	}
 } else if ($licenseTitle !== '') {
 	$serviceDescription = $licenseTitle;
 } else if ($minutesSource !== '') {

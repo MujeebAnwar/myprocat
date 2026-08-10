@@ -26,19 +26,27 @@ if(array_key_exists('NavNext',$_COOKIE)
 	}
 }
 
-// Session Log_In already ran in setup/login.php when Email+Password were POSTed
-if(!is_null($UserAccount) && is_a($UserAccount, 'useraccount') && $UserAccount->logged_in)
-{
-	header('Location: '.$redirect);
-	exit;
-}
-
 $login_error = '';
 $email_value = '';
+$agree_checked = false;
+
+// Session Log_In already ran in setup/login.php when Email+Password were POSTed.
+// Require agreement before allowing a successful login to stick.
 if(is_array($_POST) && array_key_exists('Email', $_POST))
 {
 	$email_value = htmlspecialchars($_POST['Email'], ENT_QUOTES, 'UTF-8');
-	if($_POST['Email'] === '')
+	$agree_checked = array_key_exists('agree_terms', $_POST);
+
+	if(!$agree_checked)
+	{
+		if(isset($Session) && $Session->valid)
+		{
+			$Session->Log_Out();
+			$UserAccount = &$Session->user;
+		}
+		$login_error = 'You must agree to the Privacy Policy and Single User License to sign in.';
+	}
+	else if($_POST['Email'] === '')
 	{
 		$login_error = 'You must type in your e-mail address to log in.';
 	}
@@ -46,11 +54,19 @@ if(is_array($_POST) && array_key_exists('Email', $_POST))
 	{
 		$login_error = $Session->error;
 	}
-	else
+	else if(is_null($UserAccount) || !is_a($UserAccount, 'useraccount') || !$UserAccount->logged_in)
 	{
 		$login_error = 'Invalid email or password.';
 	}
 }
+
+if($login_error === '' && !is_null($UserAccount) && is_a($UserAccount, 'useraccount') && $UserAccount->logged_in)
+{
+	header('Location: '.$redirect);
+	exit;
+}
+
+$agree_attr = $agree_checked ? ' checked' : '';
 
 $error_html = $login_error !== ''
 	? '<p id="loginError" class="signup-error" style="color:red;">'.htmlspecialchars($login_error, ENT_QUOTES, 'UTF-8').'</p>'
@@ -77,6 +93,11 @@ $form_html = <<<HTML
         <a href="/signup/forgotpassword.php">Forgot password?</a>
     </div>
 
+    <label class="signup-terms" for="agree_terms">
+        <input type="checkbox" name="agree_terms" id="agree_terms" value="1" required{$agree_attr}>
+        <span>I agree to the <a href="https://procat.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://procat.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Single User License</a> agreement.</span>
+    </label>
+
     <button type="submit" id="loginBtn" class="signup-submit-btn">Sign In</button>
 
     {$error_html}
@@ -100,7 +121,8 @@ function updateButtonState() {
     var btn = document.getElementById('loginBtn');
     var email = document.getElementById('login_email').value.trim();
     var password = document.getElementById('login_password').value;
-    if (email && password) {
+    var agreed = document.getElementById('agree_terms').checked;
+    if (email && password && agreed) {
         btn.classList.add('active');
     } else {
         btn.classList.remove('active');
@@ -109,6 +131,7 @@ function updateButtonState() {
 
 document.querySelectorAll('#loginForm input').forEach(function(input) {
     input.addEventListener('input', updateButtonState);
+    input.addEventListener('change', updateButtonState);
 });
 updateButtonState();
 JAVASCRIPT;

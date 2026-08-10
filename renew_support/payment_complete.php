@@ -87,19 +87,17 @@ function renew_support_get_sku_grant_rooms($DB, $sku_id)
 }
 
 /**
- * Extend each SKU room permission from its existing expires date.
- * - Student SKU only (`student`): +3 years
- * - All other SKUs (including student_xp / student_vr): +365 days
+ * Extend each SKU room permission from its existing expires date by +365 days.
  *
  * @param string $sku_key
- * @return array{expires_at:string,rooms:array}
+ * @return array{expires_at:string,previous_expires_at:string,rooms:array}
  */
 function renew_support_apply_room_grants($DB, $id_user, array $grant_rooms, $sku_key = '')
 {
-	$isStudent = ($sku_key === 'student');
-	$interval = $isStudent ? '+3 years' : '+365 days';
+	$interval = '+365 days';
 
-	$expiresAt = date('Y-m-d H:i:s', strtotime($interval));
+	$expiresAt = null;
+	$previousExpiresAt = null;
 	$granted = array();
 
 	foreach ($grant_rooms as $room) {
@@ -143,9 +141,11 @@ function renew_support_apply_room_grants($DB, $id_user, array $grant_rooms, $sku
 				$baseTs = $currentTs;
 			}
 		}
+		$periodStart = date('Y-m-d H:i:s', $baseTs);
 		$newExpires = date('Y-m-d H:i:s', strtotime($interval, $baseTs));
-		if (strtotime($newExpires) > strtotime($expiresAt)) {
+		if ($expiresAt === null || strtotime($newExpires) >= strtotime($expiresAt)) {
 			$expiresAt = $newExpires;
+			$previousExpiresAt = $periodStart;
 		}
 
 		$existing = array('room_permissions_id');
@@ -181,14 +181,44 @@ function renew_support_apply_room_grants($DB, $id_user, array $grant_rooms, $sku
 		$granted[] = array(
 			'product_key' => $room['product_key'],
 			'room_title' => $roomTitle,
+			'previous_expires' => $periodStart,
 			'expires' => $newExpires,
 		);
 	}
 
+	if ($expiresAt === null) {
+		$expiresAt = date('Y-m-d H:i:s', strtotime($interval));
+	}
+	if ($previousExpiresAt === null) {
+		$previousExpiresAt = date('Y-m-d H:i:s');
+	}
+
 	return array(
 		'expires_at' => $expiresAt,
+		'previous_expires_at' => $previousExpiresAt,
 		'rooms' => $granted,
 	);
+}
+
+function renew_support_format_service_period($previousExpiresAt, $expiresAt)
+{
+	$startTs = strtotime($previousExpiresAt);
+	$endTs = strtotime($expiresAt);
+	if ($startTs === false || $endTs === false) {
+		return '';
+	}
+
+	return 'Service Period: ' . date('M j, Y', $startTs) . ' – ' . date('M j, Y', $endTs);
+}
+
+function renew_support_build_service_description($displayName, $tier, $previousExpiresAt, $expiresAt)
+{
+	$description = trim((string)$displayName) . ' (' . ucfirst((string)$tier) . ')';
+	$period = renew_support_format_service_period($previousExpiresAt, $expiresAt);
+	if ($period !== '') {
+		$description .= "\n" . $period;
+	}
+	return $description;
 }
 
 function renew_support_track_student_renewal($DB, $id_user, $sku_key, $order_id, $max_renewals)
@@ -328,9 +358,15 @@ function renew_support_finalize_successful_payment($DB, array $payload)
 	$grantRooms = renew_support_get_sku_grant_rooms($DB, $sku_id);
 	$grantResult = renew_support_apply_room_grants($DB, $user_id, $grantRooms, $sku_key);
 	$expiresAt = $grantResult['expires_at'];
+	$previousExpiresAt = $grantResult['previous_expires_at'];
 	$roomsJson = json_encode($grantResult['rooms']);
 
-	$serviceDescription = $display_name . ' (' . ucfirst($tier) . ')';
+	$serviceDescription = renew_support_build_service_description(
+		$display_name,
+		$tier,
+		$previousExpiresAt,
+		$expiresAt
+	);
 
 	$invoicePayload = array(
 		'user_id' => $user_id,
@@ -344,6 +380,8 @@ function renew_support_finalize_successful_payment($DB, array $payload)
 		'json_response' => $payload['json_response'],
 		'address_details' => isset($payload['address_details']) ? $payload['address_details'] : null,
 		'service_description' => $serviceDescription,
+		'previous_expires_at' => $previousExpiresAt,
+		'expires_at' => $expiresAt,
 	);
 
 	renew_support_record_invoice($DB, $invoicePayload);
@@ -373,7 +411,7 @@ function renew_support_finalize_successful_payment($DB, array $payload)
 			$payload['payment_method'],
 			$payload['json_response'],
 			date('Y-m-d H:i:s'),
-			$display_name . ' (' . ucfirst($tier) . ')',
+			$serviceDescription,
 		)
 	);
 

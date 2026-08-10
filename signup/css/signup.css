@@ -154,6 +154,37 @@ textarea.input-field,
     margin: 0 0 4px;
 }
 
+.signup-terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.45;
+    cursor: pointer;
+}
+
+.signup-terms input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: #1a365d;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.signup-terms a {
+    color: #1a365d;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.signup-terms a:hover {
+    color: #ff6600;
+    text-decoration: underline;
+}
+
 .password-toggle {
     position: absolute;
     right: 12px;

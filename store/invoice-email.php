@@ -90,7 +90,12 @@
                   </tr>
                   <!-- Item row -->
                   <tr>
-                    <td colspan="3" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; padding:14px 16px; border-left:1px solid #e9ecef; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars(!empty($invoiceData['service_description']) ? $invoiceData['service_description'] : 'Transcription (hours)'); ?></td>
+                    <td colspan="3" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; padding:14px 16px; border-left:1px solid #e9ecef; border-right:1px solid #e9ecef;"><?php
+                      $serviceDescription = !empty($invoiceData['service_description'])
+                        ? $invoiceData['service_description']
+                        : 'Transcription (hours)';
+                      echo nl2br(htmlspecialchars($serviceDescription, ENT_QUOTES, 'UTF-8'));
+                    ?></td>
                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; text-align:center; padding:14px 8px; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars($invoiceData['hours'] ?? '0'); ?></td>
                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; text-align:center; padding:14px 8px; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars($invoiceData['rate'] ?? '0.00'); ?></td>
                   </tr>

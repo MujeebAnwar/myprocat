@@ -3,8 +3,11 @@
 require_once ('config.php');
 require_once (DOCUMENT_ROOT.'/template/Master.php');
 require_once (DOCUMENT_ROOT.'/invoices/invoices_data.php');
-// Get filter values from request (default to 'today' if not set)
-$filterDateRange = isset($_GET['date_range']) ? $_GET['date_range'] : 'today';
+// Get filter values from request (default to last 24 hours, labeled "Today")
+$filterDateRange = isset($_GET['date_range']) ? $_GET['date_range'] : 'last_24_hours';
+if ($filterDateRange === 'today') {
+	$filterDateRange = 'last_24_hours';
+}
 $filterFromDate = isset($_GET['from_date']) ? $_GET['from_date'] : '';
 $filterToDate = isset($_GET['to_date']) ? $_GET['to_date'] : '';
 $filterText = isset($_GET['text_filter']) ? $_GET['text_filter'] : '';
@@ -49,8 +52,7 @@ $dateRangeSelect = new content_block(NULL, 'select', array('class' => 'hours-inp
 
 // Date range options with selected state
 $dateRangeOptions = array(
-    'today' => 'Today',
-    'last_24_hours' => 'Last 24 Hours',
+    'last_24_hours' => 'Today',
     'last_week' => 'Last Week',
     'last_month' => 'Last Month',
     'custom' => 'Custom'
@@ -169,7 +171,19 @@ foreach($invoices as $invoice) {
     ));
     $row2->push(new content_block($invoice['customer_name'], 'td'));
     $row2->push(new content_block($invoice['invoice_date'], 'td'));
-    $row2->push(new content_block(is_null($invoice['plan_name']) ? 'N/A' : strtoupper($invoice['plan_name']), 'td'));
+    $planName = isset($invoice['plan_name']) ? $invoice['plan_name'] : null;
+    if (is_null($planName) || $planName === '') {
+        $planDisplay = 'N/A';
+    } else {
+        $planParts = preg_split("/\r\n|\n|\r/", (string)$planName, 2);
+        $planDisplay = htmlspecialchars(strtoupper($planParts[0]), ENT_QUOTES, 'UTF-8');
+        if (isset($planParts[1]) && trim($planParts[1]) !== '') {
+            $planDisplay .= '<br><span style="display:block; margin-top:4px; font-size:12px; font-weight:500; color:#555; text-transform:none;">'
+                . htmlspecialchars(trim($planParts[1]), ENT_QUOTES, 'UTF-8')
+                . '</span>';
+        }
+    }
+    $row2->push(new content_block($planDisplay, 'td'));
     $row2->push(new content_block($invoice['rate'], 'td'));
     $row2->push(new content_block(is_null($invoice['minutes']) ? 'N/A' : number_format($invoice['minutes']/60, 2), 'td'));
     $row2->push(new content_block(is_null($invoice['storage']) ? 'N/A' : $invoice['storage'], 'td'));
@@ -234,8 +248,8 @@ function toggleCustomDateRange() {
 }
 
 function clearFilters() {
-    // Reset all form fields (today is default)
-    document.getElementById("dateRangeSelect").value = "today";
+    // Reset all form fields (Today / last 24 hours is default)
+    document.getElementById("dateRangeSelect").value = "last_24_hours";
     document.getElementById("fromDate").value = "";
     document.getElementById("toDate").value = "";
     document.querySelector("input[name=\'text_filter\']").value = "";
