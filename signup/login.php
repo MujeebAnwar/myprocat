@@ -142,7 +142,13 @@ $set_body->push(new content_block($scripts, 'script', array('type' => 'text/java
 
 $set_title = 'Sign In - MyProCAT';
 $sidebar_title = 'Sign In';
+$sidebar_logo = '/templateV2/mainframe/img/logo.png';
+$sidebar_logo_href = '';
+$sidebar_logo_text = '';
 $breadcrumb_items = array();
 
+$sidebar_title = 'MyProCAT';
+$sidebar_logo = '/signup/img/login_logo.jpg';
+$sidebar_logo_text = 'MyProCAT Login';
 require_once DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php';
 ?>

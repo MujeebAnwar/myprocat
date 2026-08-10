@@ -43,12 +43,16 @@ $body->push($navbar);
 $mainContainer = new content_block(NULL, 'div', array('class' => 'main-container'));
 
 // Left sidebar - pass dynamic data
+// Pages can set: $sidebar_title, $sidebar_logo, $sidebar_logo_href, $sidebar_logo_text
 $leftSidebar = new left_sidebar(
 	isset($sidebar_title) ? $sidebar_title : 'ProCAT Resource Center',
 	isset($sidebar_phone) ? $sidebar_phone : '+01 818 222 5010',
 	isset($sidebar_email) ? $sidebar_email : 'support@procat.com',
 	isset($UserAccount) ? $UserAccount : NULL,
-	isset($DB) ? $DB : NULL
+	isset($DB) ? $DB : NULL,
+	isset($sidebar_logo) ? $sidebar_logo : NULL,
+	isset($sidebar_logo_href) ? $sidebar_logo_href : NULL,
+	isset($sidebar_logo_text) ? $sidebar_logo_text : NULL
 );
 $mainContainer->push($leftSidebar);
 

@@ -9,14 +9,32 @@ class left_sidebar extends content_block
 	private $email;
 	private $user;
 	private $DB;
+	private $logo;
+	private $logo_href;
+	private $logo_text;
 	
-	public function __construct($title = 'ProCAT Resource Center', $phone = '+01 818 222 5010', $email = 'support@procat.com', $user = NULL, $DB = NULL, $parameters = array())
+	public function __construct(
+		$title = 'ProCAT Resource Center',
+		$phone = '+01 818 222 5010',
+		$email = 'support@procat.com',
+		$user = NULL,
+		$DB = NULL,
+		$logo = NULL,
+		$logo_href = NULL,
+		$logo_text = NULL,
+		$parameters = array()
+	)
 	{
 		$this->title = $title;
 		$this->phone = $phone;
 		$this->email = $email;
 		$this->user = $user;
 		$this->DB = $DB;
+		$this->logo = $logo ? $logo : '/templateV2/mainframe/img/universtiy_logo.png';
+		$this->logo_href = $logo_href !== NULL ? $logo_href : 'https://www.youtube.com/@MyProCAT';
+		$this->logo_text = $logo_text !== NULL
+			? $logo_text
+			: 'Click on ProCAT University to access our full training library for every ProCAT topic.';
 		
 		// Create left sidebar container
 		$sidebar = new content_block(NULL, 'div', array('class' => 'left-sidebar'));
@@ -29,18 +47,24 @@ class left_sidebar extends content_block
 		// Training section
 		$trainingSection = new content_block(NULL, 'div', array('class' => 'training-section'));
 		
-		// University section
+		// Sidebar logo (page-specific via $sidebar_logo)
 		$universityDiv = new content_block(NULL, 'div');
-		$universityDiv->push(new paragraph('Click on ProCAT University to access our full training library for every ProCAT topic.',['class' => 'text-white']));
-		
-		// University logo/image
+		if($this->logo_text !== '')
+		{
+			$universityDiv->push(new paragraph($this->logo_text, ['class' => 'text-white']));
+		}
 
-		$universityLink = new content_block(NULL, 'a', array('href' => 'https://www.youtube.com/@MyProCAT', 'target' => '_blank', 'class' => 'anchor_button'));
-		$universityLink->push(new image(
-			'/templateV2/mainframe/img/universtiy_logo.png',
-			array('style' => 'padding: 20px;width: 100%;height: 100%;object-fit: contain;')
-		));
-		$universityDiv->push($universityLink);
+		$logoAttrs = array('style' => 'padding: 20px;width: 100%;height: 100%;object-fit: contain;', 'alt' => $this->title);
+		if($this->logo_href !== '')
+		{
+			$universityLink = new content_block(NULL, 'a', array('href' => $this->logo_href, 'target' => '_blank', 'class' => 'anchor_button'));
+			$universityLink->push(new image($this->logo, $logoAttrs));
+			$universityDiv->push($universityLink);
+		}
+		else
+		{
+			$universityDiv->push(new image($this->logo, $logoAttrs));
+		}
 		$trainingSection->push($universityDiv);
 		
 		// Live training section

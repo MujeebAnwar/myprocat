@@ -291,6 +291,9 @@ $set_body->push(new content_block($scripts, 'script', array('type' => 'text/java
 
 $set_title = 'Forgot Password - MyProCAT';
 $sidebar_title = 'Forgot Password';
+$sidebar_logo = '/templateV2/mainframe/img/logo.png';
+$sidebar_logo_href = '';
+$sidebar_logo_text = '';
 $breadcrumb_items = array();
 
 require_once DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php';

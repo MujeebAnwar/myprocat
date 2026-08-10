@@ -534,6 +534,9 @@ $breadcrumb_items = array(
 	array('text' => 'Invoices', 'url' => '/invoices/'),
 );
 
+$sidebar_title = 'MyProCAT';
+$sidebar_logo = '/invoices/img/invoice.png';
+$sidebar_logo_text = 'MyProCAT Invoices';
 // Include mainframe to render the page with templateV2 styling
 require_once DOCUMENT_ROOT . '/templateV2/mainframe/mainframe.php';
 ?>

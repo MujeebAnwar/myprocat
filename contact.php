@@ -152,5 +152,8 @@ $breadcrumb_items = array(
 	array('text' => 'Contact Us', 'url' => '/contact.php'),
 );
 
+$sidebar_title = 'MyProCAT';
+$sidebar_logo = '/templateV2/mainframe/img/contact.png';
+$sidebar_logo_text = 'MyProCAT Contact Us';
 require_once DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php';
 ?>

@@ -47,5 +47,8 @@ $breadcrumb_items = array(
 	array('text' => 'Payment Failed', 'url' => '#'),
 );
 
+$sidebar_title = 'MyProCAT';
+$sidebar_logo = '/renew_support/img/support.png';
+$sidebar_logo_text = 'MyProCAT Support Center';
 require_once DOCUMENT_ROOT . '/templateV2/mainframe/mainframe.php';
 ?>
