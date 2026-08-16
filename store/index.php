@@ -262,8 +262,8 @@ $breadcrumb_items = array(
 	array('text' => 'Store', 'url' => '/store/'),
 );
 
-$sidebar_title = 'MyProCAT';
+$sidebar_title = '';
 $sidebar_logo = '/store/img/buy.png';
-$sidebar_logo_text = 'MyProCAT Buy Platform Time';
+$sidebar_logo_text = '';
 require_once DOCUMENT_ROOT . '/templateV2/mainframe/mainframe.php';
 ?>

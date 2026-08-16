@@ -73,7 +73,7 @@ class my_menu extends content_block
 					
 					if($ua->user_details['is_admin'])
 					{
-						$sbm->push(new menu_item('Edit User Info',array('href' => '/admin/edit_user.php')));
+						$sbm->push(new menu_item('Edit User Info',array('href' => '/admin/users/')));
 						$sbm->push(new menu_item('Reset a password',array('href' => '/admin/reset_password.php')));
 						$sbm->push(new menu_item('Reset hardware ID',array('href' => '/admin/reset_hardwarekey.php')));
 						$sbm->push(new menu_item("Upload CSV",array('href' => "/admin/UploadCSV.php")));

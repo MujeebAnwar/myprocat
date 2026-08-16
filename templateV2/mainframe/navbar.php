@@ -88,14 +88,22 @@ class navbar extends content_block
 		// User info - dynamic based on login state
 		$userLi = new content_block(NULL, 'li', array('class' => 'user-ctn', 'onclick' => 'toggleUserDropdown()'));
 		$userLi->push(new image('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFi74mB1mAjXESb3Sb3ikYHfshZ4D4ZkMyWQ&s'));
+		
+		// Create dropdown menu
+		
+		$dropdown = new content_block(NULL, 'div', array('class' => 'user-dropdown', 'id' => 'userDropdown'));
 
+		if($isLoggedIn && $this->user->user_details['is_admin'])
+		{
+			$userInfoLink = new anchor('Edit User Info', array('href' => '/admin/users', 'class' => 'dropdown-item'));
+			$dropdown->push($userInfoLink);
+			$userLi->push($dropdown);
+		}
 		if ($isLoggedIn)
 		{
 			$userName = isset($this->user->user_details['full_name']) ? $this->user->user_details['full_name'] : 'User';
 			$userLi->push(new content_block($userName, 'span', array('class' => 'user-info')));
 
-			// Create dropdown menu
-			$dropdown = new content_block(NULL, 'div', array('class' => 'user-dropdown', 'id' => 'userDropdown'));
 			$logoutLink = new anchor('Logout', array('href' => '/logout.php', 'class' => 'dropdown-item'));
 			$dropdown->push($logoutLink);
 			$userLi->push($dropdown);

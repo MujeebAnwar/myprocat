@@ -290,8 +290,8 @@ $set_body->push(new content_block($form_html, 'raw'));
 $set_body->push(new content_block($scripts, 'script', array('type' => 'text/javascript')));
 
 $set_title = 'Forgot Password - MyProCAT';
-$sidebar_title = 'Forgot Password';
-$sidebar_logo = '/templateV2/mainframe/img/logo.png';
+$sidebar_title = '';
+$sidebar_logo = '/signup/img/login_logo.jpg';
 $sidebar_logo_href = '';
 $sidebar_logo_text = '';
 $breadcrumb_items = array();

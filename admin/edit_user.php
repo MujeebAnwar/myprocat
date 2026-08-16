@@ -486,7 +486,6 @@ SQL
 		$form->push(new input(NULL,array("type"=>"hidden",'name'=> 'action','value'=>'reset_password')));
 		$form->push(new submit('Submit'));
 		$set_body->push($form);
-
 		// Winner ..2020
 		$form = new form(NULL,array('method' => 'POST','id'=>'select_'.$id_selected));
 		$form->push(new input(NULL,array("type"=>"hidden",'name'=> 'action','value'=>'reset_hardware')));

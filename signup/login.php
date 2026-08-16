@@ -140,15 +140,11 @@ $set_body = new content_block(NULL, 'div', array('class' => 'login-page'));
 $set_body->push(new content_block($form_html, 'raw'));
 $set_body->push(new content_block($scripts, 'script', array('type' => 'text/javascript')));
 
-$set_title = 'Sign In - MyProCAT';
-$sidebar_title = 'Sign In';
-$sidebar_logo = '/templateV2/mainframe/img/logo.png';
-$sidebar_logo_href = '';
-$sidebar_logo_text = '';
+
 $breadcrumb_items = array();
 
-$sidebar_title = 'MyProCAT';
+$sidebar_title = '';
 $sidebar_logo = '/signup/img/login_logo.jpg';
-$sidebar_logo_text = 'MyProCAT Login';
+$sidebar_logo_text = '';
 require_once DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php';
 ?>

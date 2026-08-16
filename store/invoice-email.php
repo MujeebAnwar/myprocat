@@ -21,12 +21,7 @@
             <tr>
               <td style="text-align:center;">
                 <!-- Inline SVG logo to avoid external requests in email clients -->
-                <img style="height: 50px;" src="/templateV2/mainframe/img/logo.png" alt="">
-                <div style="margin-top:10px; color:#666; font-family:Arial, Helvetica, sans-serif; font-size:13px; line-height:18px;">
-                  Calabasas, CA 91302<br>
-                  (818) 222-6600<br>
-                  <a href="mailto:cs@myprocat.com" style="color:#1a365d; text-decoration:none;">cs@myprocat.com</a>
-                </div>
+                <img style="height: 50px;" src="<?php $siteUrl = 'https://' . $_SERVER['HTTP_HOST']; echo $siteUrl . '/templateV2/mainframe/img/logo.png'; ?>" alt="">
               </td>
             </tr>
           </table>
@@ -94,7 +89,7 @@
                       $serviceDescription = !empty($invoiceData['service_description'])
                         ? $invoiceData['service_description']
                         : 'Transcription (hours)';
-                      echo nl2br(htmlspecialchars($serviceDescription, ENT_QUOTES, 'UTF-8'));
+                      echo nl2br($serviceDescription);
                     ?></td>
                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; text-align:center; padding:14px 8px; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars($invoiceData['hours'] ?? '0'); ?></td>
                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; text-align:center; padding:14px 8px; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars($invoiceData['rate'] ?? '0.00'); ?></td>

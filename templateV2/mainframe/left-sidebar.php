@@ -48,16 +48,24 @@ class left_sidebar extends content_block
 		$trainingSection = new content_block(NULL, 'div', array('class' => 'training-section'));
 		
 		// Sidebar logo (page-specific via $sidebar_logo)
-		$universityDiv = new content_block(NULL, 'div');
+		$universityDiv = new content_block(NULL, 'div', array('class' => 'sidebar-brand'));
 		if($this->logo_text !== '')
 		{
-			$universityDiv->push(new paragraph($this->logo_text, ['class' => 'text-white']));
+			$universityDiv->push(new paragraph($this->logo_text, ['class' => 'text-white sidebar-logo-text']));
 		}
 
-		$logoAttrs = array('style' => 'padding: 20px;width: 100%;height: 100%;object-fit: contain;', 'alt' => $this->title);
+		$logoAttrs = array(
+			'class' => 'sidebar-logo-img',
+			'style' => 'padding: 20px;width: 100%;height: 100%;object-fit: contain;',
+			'alt' => $this->title
+		);
 		if($this->logo_href !== '')
 		{
-			$universityLink = new content_block(NULL, 'a', array('href' => $this->logo_href, 'target' => '_blank', 'class' => 'anchor_button'));
+			$universityLink = new content_block(NULL, 'a', array(
+				'href' => $this->logo_href,
+				'target' => '_blank',
+				'class' => 'anchor_button sidebar-logo-link'
+			));
 			$universityLink->push(new image($this->logo, $logoAttrs));
 			$universityDiv->push($universityLink);
 		}

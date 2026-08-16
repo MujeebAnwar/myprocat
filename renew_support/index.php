@@ -244,8 +244,8 @@ $breadcrumb_items = array(
 	array('text' => 'Renew Support', 'url' => '/renew_support/'),
 );
 
-$sidebar_title = 'MyProCAT';
+$sidebar_title = '';
 $sidebar_logo = '/renew_support/img/support.png';
-$sidebar_logo_text = 'MyProCAT Support Center';
+$sidebar_logo_text = '';
 require_once DOCUMENT_ROOT . '/templateV2/mainframe/mainframe.php';
 ?>

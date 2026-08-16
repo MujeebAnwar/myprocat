@@ -134,7 +134,6 @@ $buyContainer = new content_block(NULL, 'div', array('class' => 'buy-container',
 
 $planHeader = new content_block(NULL, 'div', array('class' => 'plan-header', 'style' => 'text-align: center; margin-bottom: 24px;'));
 $planHeader->push(new content_block($licenseTitle, 'h1', array('class' => 'plan-name', 'style' => 'font-size: 28px; color: #27475f; margin: 0 0 8px 0;')));
-$planHeader->push(new content_block($billingDescriptor, 'h2', array('class' => 'billing-description', 'style' => 'font-size: 16px; color: #666; font-weight: 500; margin: 0;')));
 $buyContainer->push($planHeader);
 
 $buyContainer->push(new content_block(NULL, 'div', array('class' => 'separator-line')));
@@ -361,12 +360,6 @@ $termsPrivacySection = new content_block(NULL, 'div', array('class' => 'terms-pr
 $termsPrivacySection->push(new paragraph('By paying, you agree to ProCAT\'s <a href="https://ProCAT.com/terms-of-service/" class="terms-link">Terms</a> and <a href="https://ProCAT.com/privacy-policy/" class="terms-link">Privacy</a>.', array('class' => 'terms-privacy-text')));
 $orderSummaryContainer->push($termsPrivacySection);
 
-$backLink = new content_block(NULL, 'div', array('style' => 'text-align: center; margin-top: 20px;'));
-$backLink->push(new anchor('← Change License Type', array(
-	'href' => '/subscription/myprocat/',
-	'style' => 'color: #27475f; text-decoration: none; font-weight: 500;',
-)));
-$orderSummaryContainer->push($backLink);
 
 $buyContainer->push($orderSummaryContainer);
 $set_body->push($buyContainer);
@@ -626,8 +619,8 @@ $breadcrumb_items = array(
 	array('text' => 'Buy Platform Time', 'url' => '/store/buy.php?type=' . urlencode($licenseType)),
 );
 
-$sidebar_title = 'MyProCAT';
+$sidebar_title = '';
 $sidebar_logo = '/store/img/buy.png';
-$sidebar_logo_text = 'MyProCAT Buy Platform Time';
+$sidebar_logo_text = '';
 require_once DOCUMENT_ROOT . '/templateV2/mainframe/mainframe.php';
 ?>
