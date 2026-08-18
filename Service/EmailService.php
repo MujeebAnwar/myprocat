@@ -32,6 +32,8 @@ class EmailService
             $this->config['from_email'],
             $this->config['from_name']
         );
+        $this->mail->CharSet = 'UTF-8';
+        $this->mail->Encoding = 'base64';
     }
 
     public function send($to, $subject, $body, $sendEmailToSales = true, $cc = null)

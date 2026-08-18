@@ -56,6 +56,10 @@ if($Session->valid && $UserAccount->logged_in && $UserAccount->user_details['is_
 // Display the edit form with existing data
 $set_body = new edit_room($UserAccount, $DB, $currentRoom);
 $breadcrumb_items[] = ['text' => $currentRoom['room_title'], 'url' => 'resource_detail.php?id=' . $currentRoom['id_room']];
-$set_title = "Myprocat.com: Edit Room";
+$page_banner = new content_block(NULL, 'div', array('class' => 'banner'));
+$page_banner->push(new content_block('Resource', 'h1'));
+
+$set_title = "Myprocat.com: Resources";
+$sidebar_title = '';
 require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

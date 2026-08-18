@@ -29,7 +29,7 @@ function renew_support_get_user_products($DB, $id_user)
 			p.room_title,
 			p.product_role,
 			rp.expires,
-			DATE_FORMAT(rp.expires + INTERVAL 3 DAY, \'%b %e, %Y\') AS expires_display,
+			DATE_FORMAT(rp.expires, \'%b %e, %Y\') AS expires_display,
 			COALESCE(p.id_room, r.id_room) AS id_room
 		FROM room_permissions rp
 		INNER JOIN rooms r ON r.id_room = rp.id_room
@@ -90,6 +90,7 @@ function renew_support_candidate_sku_keys(array $owned_keys)
 			'winner_xp_captivision',
 			'winner_xp_subscription_captivision',
 			'winner_xp_plus_xp2',
+			'winner_xp_subscription_xp2',
 		));
 	}
 	if (isset($owned['winner_vr'])) {
@@ -99,6 +100,7 @@ function renew_support_candidate_sku_keys(array $owned_keys)
 			'winner_vr_captivision',
 			'winner_vr_subscription_captivision',
 			'winner_vr_plus_vr2',
+			'winner_vr_subscription_vr2',
 		));
 	}
 	if (isset($owned['edit_only'])) {
@@ -115,6 +117,15 @@ function renew_support_candidate_sku_keys(array $owned_keys)
 	}
 	if (isset($owned['student_vr'])) {
 		$candidates[] = 'student_vr';
+	}
+	if (isset($owned['xpression'])) {
+		$candidates[] = 'xpression';
+	}
+	if (isset($owned['impression'])) {
+		$candidates[] = 'impression';
+	}
+	if (isset($owned['stylus'])) {
+		$candidates[] = 'stylus';
 	}
 
 	return array_values(array_unique($candidates));
@@ -464,6 +475,24 @@ function renew_support_available_tiers($sku_price_row)
 }
 
 /**
+ * Display labels for tiers. Plans I/J/K use Standard / Premier / Platinum.
+ *
+ * @param string $plan_code
+ * @return array<string, string>
+ */
+function renew_support_tier_labels_for_plan($plan_code)
+{
+	global $RENEW_SUPPORT_TIERS;
+	$labels = $RENEW_SUPPORT_TIERS;
+	$plan_code = strtoupper(trim((string)$plan_code));
+	if (in_array($plan_code, array('I', 'J', 'K'), true)) {
+		$labels['extended'] = 'Premier';
+		$labels['premier'] = 'Platinum';
+	}
+	return $labels;
+}
+
+/**
  * Eligible SKUs for renewing the user's current package only (no upgrades).
  *
  * @param string[] $owned_product_keys
@@ -604,6 +633,7 @@ function renew_support_get_eligible_skus($DB, array $owned_product_keys, $id_use
 			'is_current' => true,
 			'is_upgrade' => false,
 			'tiers' => $tiers,
+			'tier_labels' => renew_support_tier_labels_for_plan($row['base_plan_code']),
 			'features' => $features,
 			'addon_amount' => $addonAmount,
 			'max_renewals' => $maxRenewals,

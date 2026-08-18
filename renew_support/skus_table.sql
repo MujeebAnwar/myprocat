@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `renew_support_skus` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `sku_key` VARCHAR(64) NOT NULL COMMENT 'Stable key used in checkout / admin',
   `display_name` VARCHAR(255) NOT NULL COMMENT 'Database entry label from pricing sheet',
-  `pricing_column` ENUM('1', '2', '3', '1+4', '2+4') NOT NULL,
+  `pricing_column` ENUM('1', '2', '3', '1+4', '2+4', '2+3') NOT NULL,
   `base_plan_code` CHAR(1) NOT NULL COMMENT 'Primary plan letter A–G',
   `addon_plan_code` CHAR(1) DEFAULT NULL COMMENT 'H=Captivision (+$200) or B=2nd seat (+$125)',
   `requires_active_product_key` VARCHAR(64) DEFAULT NULL COMMENT 'e.g. winner_xp for XP2 renewals',
@@ -43,10 +43,15 @@ VALUES
   ('edit_only_subscription',             'Edit-only + Subscription',                    '2',   'G', NULL, NULL,        NULL, 70, 'Col 2 → Plan G'),
   ('winner_xp_plus_xp2',                 'Winner XP + Winner XP 2',                     '3',   'A', 'B',  'winner_xp', NULL, 80, 'Col 3 → Plan A tier + Plan B $125 (Winner XP 2); Note 1'),
   ('winner_vr_plus_vr2',                 'Winner VR + Winner VR 2',                     '3',   'A', 'B',  'winner_vr', NULL, 90, 'Col 3 → Plan A tier + Plan B $125 (Winner VR 2); Note 1'),
+  ('winner_xp_subscription_xp2',         'Winner XP + Subscription + Winner XP 2',      '2+3', 'E', 'B',  'winner_xp', NULL, 85, 'Col 2 + Col 3 → Plan E + Plan B $125'),
+  ('winner_vr_subscription_vr2',         'Winner VR + Subscription + Winner VR 2',      '2+3', 'F', 'B',  'winner_vr', NULL, 95, 'Col 2 + Col 3 → Plan F + Plan B $125'),
   ('winner_xp_captivision',              'Winner XP + Captivision',                     '1+4', 'A', 'H',  NULL,        NULL, 100, 'Col 1 + Col 4 → A + H'),
   ('winner_vr_captivision',              'Winner VR + Captivision',                     '1+4', 'A', 'H',  NULL,        NULL, 110, 'Col 1 + Col 4 → A + H'),
   ('winner_xp_subscription_captivision', 'Winner XP + Subscription + Captivision',      '2+4', 'E', 'H',  NULL,        NULL, 120, 'Col 2 + Col 4 → E + H'),
-  ('winner_vr_subscription_captivision', 'Winner VR + Subscription + Captivision',      '2+4', 'F', 'H',  NULL,        NULL, 130, 'Col 2 + Col 4 → F + H')
+  ('winner_vr_subscription_captivision', 'Winner VR + Subscription + Captivision',      '2+4', 'F', 'H',  NULL,        NULL, 130, 'Col 2 + Col 4 → F + H'),
+  ('xpression',                          'Xpression',                                   '1',   'I', NULL, NULL,        NULL, 140, 'Plan I — Standard / Premier / Platinum'),
+  ('impression',                         'Impression',                                  '1',   'J', NULL, NULL,        NULL, 150, 'Plan J — Standard / Premier / Platinum'),
+  ('stylus',                             'Stylus',                                      '1',   'K', NULL, NULL,        NULL, 160, 'Plan K — Standard only')
 ON DUPLICATE KEY UPDATE
   `display_name` = VALUES(`display_name`),
   `pricing_column` = VALUES(`pricing_column`),

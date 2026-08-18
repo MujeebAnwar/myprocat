@@ -22,3 +22,7 @@ SOURCE sku_prices_view.sql;
 -- SOURCE plans_features_alter.sql;
 -- If convenience SKUs still use Plan B only, also run:
 -- SOURCE sku_convenience_ab_update.sql;
+-- If Subscription + XP2/VR2 combined SKUs are missing, also run:
+-- SOURCE sku_subscription_convenience_update.sql;
+-- If Xpression / Impression / Stylus plans are missing, also run:
+-- SOURCE plans_xpression_impression_stylus.sql;

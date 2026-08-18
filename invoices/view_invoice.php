@@ -199,7 +199,7 @@ if ($renewSupportNotes !== '') {
 		$startTs = strtotime($periodStart);
 		$endTs = strtotime($renewExpiresAt);
 		if ($startTs !== false && $endTs !== false) {
-			$serviceDescription .= "\nService Period: " . date('M j, Y', $startTs) . ' – ' . date('M j, Y', $endTs);
+			$serviceDescription .= "\nService Period: " . date('M j, Y', $startTs) . ' - ' . date('M j, Y', $endTs);
 		}
 	}
 } else if ($licenseTitle !== '') {

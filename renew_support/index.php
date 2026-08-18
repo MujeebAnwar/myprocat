@@ -142,7 +142,9 @@ ob_start();
 							$tierIndex = 0;
 							foreach ($available_tiers as $tierKey) {
 								$tierPrice = $sku['tiers'][$tierKey];
-								$tierLabel = isset($RENEW_SUPPORT_TIERS[$tierKey]) ? $RENEW_SUPPORT_TIERS[$tierKey] : ucfirst($tierKey);
+								$tierLabel = isset($sku['tier_labels'][$tierKey])
+									? $sku['tier_labels'][$tierKey]
+									: (isset($RENEW_SUPPORT_TIERS[$tierKey]) ? $RENEW_SUPPORT_TIERS[$tierKey] : ucfirst($tierKey));
 								$isAccent = ($tier_count > 1 && $tierIndex === 1);
 								$cardClass = 'renew-support-card';
 								if ($isAccent) {

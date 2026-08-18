@@ -7,6 +7,7 @@ require_once(DOCUMENT_ROOT.'/lib/adminactions.php');
 require_once(DOCUMENT_ROOT.'/lib/keyless_lib.php');
 require_once(DOCUMENT_ROOT.'/lib/nonce.php');
 require_once(DOCUMENT_ROOT.'/template/Master.php');
+require_once(__DIR__.'/user_info_lib.php');
 
 function admin_users_h($value)
 {
@@ -96,6 +97,7 @@ if(is_array($_POST) && array_key_exists('action', $_POST))
 			{
 				$results = array(
 					'id_user','email','first_name','last_name','account_expires',
+					'address','city','state','zip',
 					'id_perm','id_room','room_title','can_read','can_upload','can_remove',
 					'room_expires','hardware_key','password_last_changed'
 				);
@@ -104,6 +106,7 @@ if(is_array($_POST) && array_key_exists('action', $_POST))
 					'SELECT '.
 					'accounts.id_user,accounts.email,accounts.first_name,'.
 					'accounts.last_name,accounts.expires,'.
+					'accounts.address,accounts.city,accounts.state,accounts.zip,'.
 					'room_permissions.room_permissions_id,room_permissions.id_room,rooms.room_title,'.
 					'room_permissions.can_read,room_permissions.can_upload,room_permissions.can_remove,'.
 					'room_permissions.expires,hardware.id_hardware,'.
@@ -128,8 +131,12 @@ if(is_array($_POST) && array_key_exists('action', $_POST))
 					$id_selected = $results[0]['id_user'];
 					$user_info = array_intersect_key(
 						$results[0],
-						array_flip(array('email','first_name','last_name','account_expires','password_last_changed'))
+						array_flip(array(
+							'email','first_name','last_name','account_expires','password_last_changed',
+							'address','city','state','zip'
+						))
 					);
+					$user_info = array_merge($user_info, admin_users_load_user_info($DB, $id_selected));
 					$permissions = $results;
 				}
 				else
@@ -151,11 +158,33 @@ if(is_array($_POST) && array_key_exists('action', $_POST))
 				&& array_key_exists('account_expires', $_POST) && !is_null($_POST['account_expires']) && strlen($_POST['account_expires']) > 0
 			)
 			{
+				$address = isset($_POST['address']) ? trim($_POST['address']) : '';
+				$city = isset($_POST['city']) ? trim($_POST['city']) : '';
+				$state = isset($_POST['state']) ? trim($_POST['state']) : '';
+				$zip = isset($_POST['zip']) ? trim($_POST['zip']) : '';
+				$company_name = isset($_POST['company_name']) ? trim($_POST['company_name']) : '';
+				$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+
 				$r = $DB->sql(
-					'UPDATE accounts SET email=?,first_name=?,last_name=?,expires=? WHERE id_user=?',
-					array('sssss', $_POST['email'], $_POST['first_name'], $_POST['last_name'], $_POST['account_expires'], $id_selected)
+					'UPDATE accounts SET email=?,first_name=?,last_name=?,expires=?,address=?,city=?,state=?,zip=? WHERE id_user=?',
+					array(
+						'sssssssss',
+						$_POST['email'],
+						$_POST['first_name'],
+						$_POST['last_name'],
+						$_POST['account_expires'],
+						$address,
+						$city,
+						$state,
+						$zip,
+						$id_selected
+					)
 				);
-				if(!$r)
+				$infoSaved = admin_users_save_user_info($DB, $id_selected, array(
+					'company_name' => $company_name,
+					'phone' => $phone,
+				));
+				if(!$r && !$infoSaved)
 				{
 					admin_users_notice($notices, 'No user data changed', 'info');
 				}
@@ -385,6 +414,7 @@ if(!is_null($id_selected) && is_null($permissions))
 {
 	$results = array(
 		'id_user','email','first_name','last_name','account_expires',
+		'address','city','state','zip',
 		'id_perm','id_room','room_title','can_read','can_upload','can_remove',
 		'room_expires','hardware_key','password_last_changed'
 	);
@@ -392,6 +422,7 @@ if(!is_null($id_selected) && is_null($permissions))
 		'SELECT '.
 		'accounts.id_user,accounts.email,accounts.first_name,'.
 		'accounts.last_name,accounts.expires,'.
+		'accounts.address,accounts.city,accounts.state,accounts.zip,'.
 		'room_permissions.room_permissions_id,room_permissions.id_room,rooms.room_title,'.
 		'room_permissions.can_read,room_permissions.can_upload,room_permissions.can_remove,'.
 		'room_permissions.expires,hardware.id_hardware,'.
@@ -409,11 +440,19 @@ if(!is_null($id_selected) && is_null($permissions))
 	{
 		$user_info = array_intersect_key(
 			$results[0],
-			array_flip(array('email','first_name','last_name','account_expires','password_last_changed'))
+			array_flip(array(
+				'email','first_name','last_name','account_expires','password_last_changed',
+				'address','city','state','zip'
+			))
 		);
+		$user_info = array_merge($user_info, admin_users_load_user_info($DB, $id_selected));
 		$permissions = $results;
 	}
 	$search_for = $id_selected;
+}
+else if(!is_null($id_selected) && is_array($user_info) && !array_key_exists('company_name', $user_info))
+{
+	$user_info = array_merge($user_info, admin_users_load_user_info($DB, $id_selected));
 }
 
 $roomlist = array();
@@ -530,6 +569,34 @@ ob_start();
 				<div class="admin-users-field">
 					<label for="password_last_changed">Password Last Changed</label>
 					<input type="text" class="input-field" id="password_last_changed" value="<?php echo admin_users_h(isset($user_info['password_last_changed']) ? $user_info['password_last_changed'] : ''); ?>" readonly>
+				</div>
+			</div>
+			<div class="admin-users-field-row">
+				<div class="admin-users-field">
+					<label for="company_name">Company Name</label>
+					<input type="text" class="input-field" name="company_name" id="company_name" value="<?php echo admin_users_h(isset($user_info['company_name']) ? $user_info['company_name'] : ''); ?>">
+				</div>
+				<div class="admin-users-field">
+					<label for="phone">Phone</label>
+					<input type="tel" class="input-field" name="phone" id="phone" value="<?php echo admin_users_h(isset($user_info['phone']) ? $user_info['phone'] : ''); ?>">
+				</div>
+			</div>
+			<div class="admin-users-field">
+				<label for="address">Address</label>
+				<input type="text" class="input-field" name="address" id="address" value="<?php echo admin_users_h(isset($user_info['address']) ? $user_info['address'] : ''); ?>">
+			</div>
+			<div class="admin-users-field-row">
+				<div class="admin-users-field">
+					<label for="city">City</label>
+					<input type="text" class="input-field" name="city" id="city" value="<?php echo admin_users_h(isset($user_info['city']) ? $user_info['city'] : ''); ?>">
+				</div>
+				<div class="admin-users-field">
+					<label for="state">State</label>
+					<input type="text" class="input-field" name="state" id="state" value="<?php echo admin_users_h(isset($user_info['state']) ? $user_info['state'] : ''); ?>">
+				</div>
+				<div class="admin-users-field">
+					<label for="zip">Zip</label>
+					<input type="text" class="input-field" name="zip" id="zip" value="<?php echo admin_users_h(isset($user_info['zip']) ? $user_info['zip'] : ''); ?>">
 				</div>
 			</div>
 			<div class="admin-users-actions">

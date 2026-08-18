@@ -42,6 +42,12 @@ FROM (
   UNION ALL SELECT 'winner_xp_plus_xp2', 'winner_xp_2', 20
   UNION ALL SELECT 'winner_vr_plus_vr2', 'winner_vr', 10
   UNION ALL SELECT 'winner_vr_plus_vr2', 'winner_vr_2', 20
+  UNION ALL SELECT 'winner_xp_subscription_xp2', 'winner_xp', 10
+  UNION ALL SELECT 'winner_xp_subscription_xp2', 'subscription_account', 20
+  UNION ALL SELECT 'winner_xp_subscription_xp2', 'winner_xp_2', 30
+  UNION ALL SELECT 'winner_vr_subscription_vr2', 'winner_vr', 10
+  UNION ALL SELECT 'winner_vr_subscription_vr2', 'subscription_account', 20
+  UNION ALL SELECT 'winner_vr_subscription_vr2', 'winner_vr_2', 30
   UNION ALL SELECT 'winner_xp_captivision', 'winner_xp', 10
   UNION ALL SELECT 'winner_xp_captivision', 'captivision', 20
   UNION ALL SELECT 'winner_vr_captivision', 'winner_vr', 10
@@ -52,6 +58,9 @@ FROM (
   UNION ALL SELECT 'winner_vr_subscription_captivision', 'winner_vr', 10
   UNION ALL SELECT 'winner_vr_subscription_captivision', 'subscription_account', 20
   UNION ALL SELECT 'winner_vr_subscription_captivision', 'captivision', 30
+  UNION ALL SELECT 'xpression', 'xpression', 10
+  UNION ALL SELECT 'impression', 'impression', 10
+  UNION ALL SELECT 'stylus', 'stylus', 10
 ) AS x
 INNER JOIN `renew_support_skus` s ON s.sku_key = x.sku_key
 INNER JOIN `renew_support_products` p ON p.product_key = x.product_key

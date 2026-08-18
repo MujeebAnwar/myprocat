@@ -238,6 +238,7 @@ function myprocat_record_payment_invoice_and_credits($DB, array $payload)
 	$customerName = trim($userDetails['first_name'] . ' ' . $userDetails['mid_name'] . ' ' . $userDetails['last_name']);
 
 	$invoiceData = array(
+		'service_description' => $payload['license_title'],
 		'invoice_number' => $payload['invoice_number'],
 		'invoice_date' => date('F j, Y g:i A', strtotime($payload['invoice_date'])),
 		'rate' => $payload['rate'],

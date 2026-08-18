@@ -117,7 +117,7 @@ if (!$hasSavedCard) {
 
 $licenseTitles = array(
 	'perpetual' => 'Perpetual License',
-	'subscription' => 'Subscription License',
+	'subscription' => 'Winner Voice AI Cloud Speech',
 );
 $licenseTitle = $licenseTitles[$licenseType];
 $billingDescriptor = ($licenseType === 'subscription') ? 'Subscription License' : 'One-Time License Purchase';

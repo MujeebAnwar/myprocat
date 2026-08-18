@@ -38,7 +38,10 @@ VALUES
   ('captivision',          'Captivision',            'CaptiVision',            6,   'addon',               0, 50, 'Column 4 add-on (+$200)'),
   ('subscription_account', 'Subscription Account',   'Subscription Accounts',  112, 'subscription_flag',   0, 60, 'Never sold alone; combined with another license'),
   ('winner_xp_2',          'Winner XP 2',            '2nd Winner XP',          113, 'convenience_second',  0, 70, 'Column 3; requires active Winner XP'),
-  ('winner_vr_2',          'Winner VR 2',            '2nd Winner VR',          114, 'convenience_second',  0, 80, 'Column 3; requires active Winner VR')
+  ('winner_vr_2',          'Winner VR 2',            '2nd Winner VR',          114, 'convenience_second',  0, 80, 'Column 3; requires active Winner VR'),
+  ('xpression',            'Xpression',              'Xpression',              NULL,'primary',             1, 90, 'Standard / Premier / Platinum'),
+  ('impression',           'Impression',             'Impression',             NULL,'primary',             1, 100, 'Standard / Premier / Platinum'),
+  ('stylus',               'Stylus',                 'Stylus',                 NULL,'primary',             1, 110, 'Standard only')
 ON DUPLICATE KEY UPDATE
   `display_name` = VALUES(`display_name`),
   `room_title` = VALUES(`room_title`),

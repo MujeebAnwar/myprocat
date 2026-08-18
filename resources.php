@@ -66,7 +66,10 @@ if(isset($_POST['action']) && isset($_POST['id_room']) && $_POST['action'] === '
 	}
 
 }
+$page_banner = new content_block(NULL, 'div', array('class' => 'banner'));
+$page_banner->push(new content_block('Resource', 'h1'));
 
-$set_title = "Myprocat.com: Resource Rooms";
+$set_title = "Myprocat.com: Resources";
+$sidebar_title = '';
 require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

@@ -208,7 +208,7 @@ function renew_support_format_service_period($previousExpiresAt, $expiresAt)
 		return '';
 	}
 
-	return 'Service Period: ' . date('M j, Y', $startTs) . ' – ' . date('M j, Y', $endTs);
+	return 'Service Period: ' . date('M j, Y', $startTs) . ' - ' . date('M j, Y', $endTs);
 }
 
 function renew_support_build_service_description($displayName, $tier, $previousExpiresAt, $expiresAt)

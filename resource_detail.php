@@ -37,5 +37,10 @@ if(is_array($_GET) && array_key_exists('id',$_GET) && is_numeric($_GET['id']))
 }
 
 // Render the page
+$page_banner = new content_block(NULL, 'div', array('class' => 'banner'));
+$page_banner->push(new content_block('Resource', 'h1'));
+
+$set_title = "Myprocat.com: Resources";
+$sidebar_title = '';
 require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

@@ -54,7 +54,16 @@ VALUES
    0, 'Column 2'),
   ('H', 'Captivision add-on', 200.00, NULL, NULL,
    '{"standard":["Captivision add-on","Added to base plan price"]}',
-   1, 'Column 4; always +$200 on top of base plan')
+   1, 'Column 4; always +$200 on top of base plan'),
+  ('I', 'Xpression', 395.00, 495.00, 895.00,
+   '{"standard":["Standard support coverage","Renews your Xpression license"],"extended":["Premier support coverage","Renews your Xpression license"],"premier":["Platinum support coverage","Renews your Xpression license"]}',
+   0, 'Standard / Premier / Platinum'),
+  ('J', 'Impression', 495.00, 595.00, 895.00,
+   '{"standard":["Standard support coverage","Renews your Impression license"],"extended":["Premier support coverage","Renews your Impression license"],"premier":["Platinum support coverage","Renews your Impression license"]}',
+   0, 'Standard / Premier / Platinum'),
+  ('K', 'Stylus', 595.00, NULL, NULL,
+   '{"standard":["Standard support coverage","Renews your Stylus license"]}',
+   0, 'Standard only')
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `standard_price` = VALUES(`standard_price`),

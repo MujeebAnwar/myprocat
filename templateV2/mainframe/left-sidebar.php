@@ -49,10 +49,6 @@ class left_sidebar extends content_block
 		
 		// Sidebar logo (page-specific via $sidebar_logo)
 		$universityDiv = new content_block(NULL, 'div', array('class' => 'sidebar-brand'));
-		if($this->logo_text !== '')
-		{
-			$universityDiv->push(new paragraph($this->logo_text, ['class' => 'text-white sidebar-logo-text']));
-		}
 
 		$logoAttrs = array(
 			'class' => 'sidebar-logo-img',
@@ -72,6 +68,10 @@ class left_sidebar extends content_block
 		else
 		{
 			$universityDiv->push(new image($this->logo, $logoAttrs));
+		}
+		if($this->logo_text !== '')
+		{
+			$universityDiv->push(new paragraph($this->logo_text, ['class' => 'text-white sidebar-logo-text']));
 		}
 		$trainingSection->push($universityDiv);
 		

@@ -24,7 +24,7 @@ if($id_file <= 0) {
 if($Session->valid && $UserAccount->logged_in && $UserAccount->user_details['is_admin'])
 {
 	$set_title = "Myprocat.com: Publish File";
-	$set_body = new section();
+	$set_body = new section(NULL, array('style' => 'width: 100%; align-self: stretch;'));
 	$error = "";
 	$complete = false;
 	if(is_array($_POST) && array_key_exists('action',$_POST) && $_POST['action'] === 'publish')
@@ -89,5 +89,10 @@ if($Session->valid && $UserAccount->logged_in && $UserAccount->user_details['is_
 	$set_body = new paragraph("You do not have permission to use this page.");
 }
 
+$page_banner = new content_block(NULL, 'div', array('class' => 'banner'));
+$page_banner->push(new content_block('Resource', 'h1'));
+
+$set_title = "Myprocat.com: Resources";
+$sidebar_title = '';
 require_once (DOCUMENT_ROOT.'/templateV2/mainframe/mainframe.php');
 ?>

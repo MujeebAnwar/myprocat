@@ -89,7 +89,13 @@
                       $serviceDescription = !empty($invoiceData['service_description'])
                         ? $invoiceData['service_description']
                         : 'Transcription (hours)';
-                      echo nl2br($serviceDescription);
+                      // Normalize fancy dashes / mojibake so email clients don't show "â€“".
+                      $serviceDescription = str_replace(
+                        array("\xE2\x80\x93", "\xE2\x80\x94", 'â€“', 'â€”', '–', '—'),
+                        ' - ',
+                        $serviceDescription
+                      );
+                      echo nl2br(htmlspecialchars($serviceDescription, ENT_QUOTES, 'UTF-8'));
                     ?></td>
                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; text-align:center; padding:14px 8px; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars($invoiceData['hours'] ?? '0'); ?></td>
                     <td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#1a365d; text-align:center; padding:14px 8px; border-right:1px solid #e9ecef;"><?php echo htmlspecialchars($invoiceData['rate'] ?? '0.00'); ?></td>

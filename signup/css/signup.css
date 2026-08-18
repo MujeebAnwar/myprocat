@@ -51,9 +51,28 @@
     box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
 }
 
-.input-field::placeholder {
+select.input-field {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    padding-right: 40px;
+    cursor: pointer;
+    color: #27475f;
+}
+
+select.input-field:invalid,
+select.input-field.placeholder-selected {
     color: #999;
     font-style: italic;
+}
+
+select.input-field option {
+    color: #27475f;
+    font-style: normal;
 }
 
 textarea.input-field,
@@ -225,4 +244,77 @@ textarea.input-field,
     line-height: 1.45;
     margin: 0 0 10px;
     font-weight: bold;
+}
+
+/* Select2 — match contact/signup input fields */
+.signup-field .select2-container {
+    width: 100% !important;
+}
+
+.signup-field .select2-container--default .select2-selection--single {
+    height: 50px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    background-color: #F6F7FB;
+    font-family: "Montserrat", sans-serif;
+}
+
+.signup-field .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 46px;
+    padding-left: 15px;
+    padding-right: 40px;
+    font-size: 18px;
+    color: #27475f;
+}
+
+.signup-field .select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.signup-field .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 46px;
+    right: 10px;
+}
+
+.signup-field .select2-container--default .select2-selection--single .select2-selection__clear {
+    height: 46px;
+    margin-right: 24px;
+    font-size: 18px;
+    color: #999;
+}
+
+.signup-field .select2-container--default.select2-container--focus .select2-selection--single,
+.signup-field .select2-container--default.select2-container--open .select2-selection--single {
+    border-color: #ff6600;
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+    outline: none;
+}
+
+.select2-container--default .select2-dropdown {
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+    border-color: #ff6600;
+    outline: none;
+}
+
+.select2-container--default .select2-results__option {
+    font-size: 15px;
+    padding: 10px 12px;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #ff6600;
 }

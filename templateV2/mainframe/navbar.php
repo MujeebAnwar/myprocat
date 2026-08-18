@@ -54,7 +54,7 @@ class navbar extends content_block
 
 			if ($winnerLicense === true || $winnerLicense !== 'Lite') {
 				$navList->push(new content_block(
-					new anchor('Store', array('href' => '/store/buy.php')),
+					new anchor('Cloud Speech', array('href' => '/store/buy.php')),
 					'li'
 				));
 			}
@@ -65,7 +65,7 @@ class navbar extends content_block
 			));
 
 			$navList->push(new content_block(
-				new anchor('Support', array('href' => '/contact.php')),
+				new anchor('Request Support', array('href' => '/contact.php')),
 				'li'
 			));
 
@@ -80,7 +80,7 @@ class navbar extends content_block
 			));
 
 			$navList->push(new content_block(
-				new anchor('RESOURCES', array('href' => '/resources.php')),
+				new anchor('Resources', array('href' => '/resources.php')),
 				'li'
 			));
 		}
@@ -159,7 +159,7 @@ class navbar extends content_block
 				var nav = document.getElementById('mainNav');
 				var btn = document.getElementById('mobileMenuToggle');
 				if (!nav || !btn) return;
-				if (window.innerWidth > 1400) {
+				if (window.innerWidth > 1100) {
 					nav.classList.remove('open');
 					btn.setAttribute('aria-expanded', 'false');
 				}

@@ -28,7 +28,9 @@ if(array_key_exists('NavNext',$_COOKIE)
 
 $login_error = '';
 $email_value = '';
-$agree_checked = false;
+$terms_cookie = 'MPROCAT_AGREE_TERMS';
+$terms_previously_agreed = !empty($_COOKIE[$terms_cookie]);
+$agree_checked = $terms_previously_agreed;
 
 // Session Log_In already ran in setup/login.php when Email+Password were POSTed.
 // Require agreement before allowing a successful login to stick.
@@ -62,6 +64,10 @@ if(is_array($_POST) && array_key_exists('Email', $_POST))
 
 if($login_error === '' && !is_null($UserAccount) && is_a($UserAccount, 'useraccount') && $UserAccount->logged_in)
 {
+	if($agree_checked)
+	{
+		setcookie($terms_cookie, '1', time() + (86400 * 183), '/', '', false, true); // 6 months
+	}
 	header('Location: '.$redirect);
 	exit;
 }

@@ -15,6 +15,9 @@ UPDATE `renew_support_plans` SET `features_json` = CASE `plan_code`
   WHEN 'F' THEN '{"standard":["Standard support coverage","Includes Subscription Accounts"],"extended":["Extended support coverage","Includes Subscription Accounts"]}'
   WHEN 'G' THEN '{"standard":["Standard support coverage","Includes Subscription Accounts"],"extended":["Extended support coverage","Includes Subscription Accounts"]}'
   WHEN 'H' THEN '{"standard":["Captivision add-on","Added to base plan price"]}'
+  WHEN 'I' THEN '{"standard":["Standard support coverage","Renews your Xpression license"],"extended":["Premier support coverage","Renews your Xpression license"],"premier":["Platinum support coverage","Renews your Xpression license"]}'
+  WHEN 'J' THEN '{"standard":["Standard support coverage","Renews your Impression license"],"extended":["Premier support coverage","Renews your Impression license"],"premier":["Platinum support coverage","Renews your Impression license"]}'
+  WHEN 'K' THEN '{"standard":["Standard support coverage","Renews your Stylus license"]}'
   ELSE `features_json`
 END
 WHERE `features_json` IS NULL OR `features_json` = '';
